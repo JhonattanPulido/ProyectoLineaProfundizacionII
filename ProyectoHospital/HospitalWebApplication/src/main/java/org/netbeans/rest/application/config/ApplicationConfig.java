@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.mycompany.hospitalwebapplication.controller.ConsultaController.class);
         resources.add(com.mycompany.hospitalwebapplication.controller.MedicoController.class);
         resources.add(com.mycompany.hospitalwebapplication.exception.filter.ExceptionFilter.class);
         resources.add(com.mycompany.hospitalwebapplication.exception.filter.IntegridadExceptionFilter.class);

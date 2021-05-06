@@ -3,6 +3,7 @@ package com.hospitalejbmodule.entity;
 
 // Librerías
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -69,6 +71,12 @@ public class Medico implements Serializable {
      */
     @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)    
     private Direccion direccion;
+    
+    /**
+     * Lista de consultas
+     */
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Consulta> listaConsultas;
 
     /**
      * Constructor
@@ -117,6 +125,14 @@ public class Medico implements Serializable {
 
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
+    }        
+
+    public List<Consulta> getListaConsultas() {
+        return listaConsultas;
+    }
+
+    public void setListaConsultas(List<Consulta> listaConsultas) {
+        this.listaConsultas = listaConsultas;
     }        
     
 }

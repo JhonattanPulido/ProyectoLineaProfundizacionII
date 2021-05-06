@@ -44,6 +44,12 @@ public interface IGenericaRepository<T> {
     public void actualizar(T t);
     
     /**
+     * Eliminar registro
+     * @param t 
+     */
+    public void eliminar(T t);
+    
+    /**
      * Cantidad de registros con un ID
      * @param queryName
      * @param id

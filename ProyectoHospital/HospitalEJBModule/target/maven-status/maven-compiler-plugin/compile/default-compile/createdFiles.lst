@@ -1,5 +1,9 @@
+com\hospitalejbmodule\repository\ConsultaRepository.class
 com\hospitalejbmodule\entity\Direccion.class
 com\hospitalejbmodule\NewSessionBean.class
+com\hospitalejbmodule\entity\Consulta.class
+com\hospitalejbmodule\entity\DetalleConsulta.class
+com\hospitalejbmodule\entity\DetalleConsulta_.class
 com\hospitalejbmodule\repository\interfaz\IMedicoRepository.class
 com\hospitalejbmodule\service\MedicoService.class
 com\hospitalejbmodule\entity\Direccion_.class
@@ -7,8 +11,12 @@ com\hospitalejbmodule\repository\interfaz\IGenericaRepository.class
 com\hospitalejbmodule\service\interfaz\IMedicoService.class
 com\hospitalejbmodule\excepciones\NotFoundException.class
 com\hospitalejbmodule\repository\GenericaRepository.class
+com\hospitalejbmodule\service\interfaz\IConsultaService.class
 com\hospitalejbmodule\entity\Medico.class
+com\hospitalejbmodule\repository\interfaz\IConsultaRepository.class
+com\hospitalejbmodule\service\ConsultaService.class
 com\hospitalejbmodule\repository\MedicoRepository.class
 com\hospitalejbmodule\service\interfaz\IGenericaService.class
 com\hospitalejbmodule\excepciones\IntegridadException.class
 com\hospitalejbmodule\entity\Medico_.class
+com\hospitalejbmodule\entity\Consulta_.class

@@ -106,5 +106,10 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     public long cantidadId(String queryName, short id) {
         return (long) em.createNamedQuery(queryName, long.class).setParameter("id", id).getSingleResult();
     }
+
+    @Override
+    public void eliminar(T t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
