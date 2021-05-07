@@ -3,9 +3,11 @@ package com.hospitalejbmodule.entity;
 
 // Librerías
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -41,11 +46,14 @@ public class Consulta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
     
+    /*@Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;*/
+    
     /**
      * Médico asociado
      */
-    @OneToOne
-    @JsonbTransient 
+    @OneToOne    
     @JoinColumn(name = "medico_id")
     @NotNull(message = "El médico asociado es requerido")
     private Medico medico;
@@ -53,7 +61,7 @@ public class Consulta implements Serializable {
     /**
      * Detalles consultas asociadas
      */
-    @OneToOne(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DetalleConsulta> listaDetallesConsultas;
 
     /**

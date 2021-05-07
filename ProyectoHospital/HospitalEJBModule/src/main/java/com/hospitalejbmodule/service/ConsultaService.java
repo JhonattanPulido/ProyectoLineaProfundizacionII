@@ -7,6 +7,7 @@ import com.hospitalejbmodule.entity.DetalleConsulta;
 import com.hospitalejbmodule.excepciones.IntegridadException;
 import com.hospitalejbmodule.excepciones.NotFoundException;
 import com.hospitalejbmodule.repository.interfaz.IConsultaRepository;
+import com.hospitalejbmodule.repository.interfaz.IMedicoRepository;
 import com.hospitalejbmodule.service.interfaz.IConsultaService;
 import java.util.List;
 import javax.ejb.EJB;
@@ -29,6 +30,12 @@ public class ConsultaService implements IConsultaService {
      */
     @EJB
     private IConsultaRepository consultaRepository;
+    
+    /**
+     * Datos de médico
+     */
+    @EJB
+    private IMedicoRepository medicoRepository;
 
     // Métodos
     
@@ -38,7 +45,10 @@ public class ConsultaService implements IConsultaService {
      * @throws IntegridadException 
      */
     @Override
-    public void crear(Consulta consulta) throws IntegridadException {
+    public void crear(Consulta consulta) throws IntegridadException, NotFoundException {
+        
+        consulta.setMedico(medicoRepository.leer("LeerMedico", consulta.getMedico().getId()));
+        
         for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas())
             detalleConsulta.setConsulta(consulta);
         

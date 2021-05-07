@@ -3,6 +3,7 @@ package com.mycompany.hospitalwebapplication.controller;
 
 // Librerías
 import com.hospitalejbmodule.entity.Consulta;
+import com.hospitalejbmodule.entity.Medico;
 import com.hospitalejbmodule.excepciones.IntegridadException;
 import com.hospitalejbmodule.excepciones.NotFoundException;
 import com.hospitalejbmodule.service.interfaz.IConsultaService;
@@ -43,13 +44,19 @@ public class ConsultaController implements Serializable {
     /**
      * Crear consulta
      * @param consulta
+     * @param medicoId 
      * @return
      * @throws IntegridadException 
+     * @throws NotFoundException
      */
     @POST
+    @Path("/{medicoId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crear(Consulta consulta) throws IntegridadException {
+    public Response crear(Consulta consulta, @PathParam("medicoId") Short medicoId) throws IntegridadException, NotFoundException {
+        
+        consulta.setMedico(new Medico());
+        consulta.getMedico().setId(medicoId);
         
         consultaService.crear(consulta);
         

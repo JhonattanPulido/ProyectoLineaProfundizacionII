@@ -53,8 +53,8 @@ public class DetalleConsulta implements Serializable {
     /**
      * Consulta asociada
      */
-    @ManyToOne
-    @JsonbTransient 
+    @ManyToOne  
+    @JsonbTransient
     @JoinColumn(name = "consulta_id", referencedColumnName = "id")
     private Consulta consulta;
 

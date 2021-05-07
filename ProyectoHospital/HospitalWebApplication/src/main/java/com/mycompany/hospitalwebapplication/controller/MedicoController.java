@@ -45,11 +45,12 @@ public class MedicoController implements Serializable {
      * @param medico
      * @return
      * @throws IntegridadException 
+     * @throws NotFoundException
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crear(Medico medico) throws IntegridadException {
+    public Response crear(Medico medico) throws IntegridadException, NotFoundException {
     
         medicoService.crear(medico);
         

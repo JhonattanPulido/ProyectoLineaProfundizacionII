@@ -22,8 +22,9 @@ public interface IGenericaService<T> {
      * Crear registro
      * @param t 
      * @throws IntegridadException
+     * @throws NotFoundException
      */
-    public void crear(T t) throws   IntegridadException;
+    public void crear(T t) throws   IntegridadException, NotFoundException;
     
     /**
      * Leer registro

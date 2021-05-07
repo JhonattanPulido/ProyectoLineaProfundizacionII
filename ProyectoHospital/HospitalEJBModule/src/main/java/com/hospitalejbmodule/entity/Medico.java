@@ -4,6 +4,7 @@ package com.hospitalejbmodule.entity;
 // Librerías
 import java.io.Serializable;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -76,6 +77,7 @@ public class Medico implements Serializable {
      * Lista de consultas
      */
     @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonbTransient
     private List<Consulta> listaConsultas;
 
     /**
