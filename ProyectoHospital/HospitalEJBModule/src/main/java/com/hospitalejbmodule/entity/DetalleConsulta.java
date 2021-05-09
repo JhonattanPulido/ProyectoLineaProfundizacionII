@@ -2,10 +2,13 @@
 package com.hospitalejbmodule.entity;
 
 // Librerías
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,9 +56,8 @@ public class DetalleConsulta implements Serializable {
     /**
      * Consulta asociada
      */
-    @ManyToOne  
-    @JsonbTransient
-    @JoinColumn(name = "consulta_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)      
+    @JoinColumn(name = "consulta_id")    
     private Consulta consulta;
 
     /**
@@ -90,7 +92,8 @@ public class DetalleConsulta implements Serializable {
     public void setTratamiento(String tratamiento) {
         this.tratamiento = tratamiento;
     }
-
+    
+    @JsonbTransient
     public Consulta getConsulta() {
         return consulta;
     }

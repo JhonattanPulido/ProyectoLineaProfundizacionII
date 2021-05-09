@@ -13,8 +13,9 @@ import javax.ws.rs.core.NoContentException;
  * @version 1.0.0
  * @since 05/05/2021
  * @param <T>
+ * @param <U>
  */
-public interface IGenericaService<T> {
+public interface IGenericaService<T, U> {
     
     // Métodos
     
@@ -32,14 +33,14 @@ public interface IGenericaService<T> {
      * @return 
      * @throws NotFoundException
      */
-    public T leer(short id) throws  NotFoundException;
+    public U leer(short id) throws  NotFoundException;
     
     /**
      * Leer todos los registros
      * @return
      * @throws NoContentException 
      */
-    public List<T> leer() throws    NoContentException;
+    public List<U> leer() throws    NoContentException;
     
     /**
      * Actualizar registro

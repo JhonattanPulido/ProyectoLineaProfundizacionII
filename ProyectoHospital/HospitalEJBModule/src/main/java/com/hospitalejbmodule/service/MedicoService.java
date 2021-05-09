@@ -7,10 +7,13 @@ import com.hospitalejbmodule.excepciones.IntegridadException;
 import com.hospitalejbmodule.excepciones.NotFoundException;
 import com.hospitalejbmodule.repository.interfaz.IMedicoRepository;
 import com.hospitalejbmodule.service.interfaz.IMedicoService;
+import com.hospitalejbmodule.utilitarie.UMedico;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.NoContentException;
+import org.modelmapper.ModelMapper;
 
 /**
  * Capa de servicios de médico
@@ -40,7 +43,7 @@ public class MedicoService implements IMedicoService {
     public void crear(Medico medico) throws IntegridadException {
         if (medicoRepository.cantidadEmail(medico.getCorreoElectronico()) == 0) {
             
-            medico.getDireccion().setMedico(medico);
+            //medico.getDireccion().setMedico(medico);
             medicoRepository.crear(medico);
             
         } else
@@ -54,8 +57,9 @@ public class MedicoService implements IMedicoService {
      * @throws NotFoundException 
      */
     @Override
-    public Medico leer(short id) throws NotFoundException {
-        return medicoRepository.leer("LeerMedico", id);
+    public UMedico leer(short id) throws NotFoundException {
+        Medico medico = medicoRepository.leer("LeerMedico", id);                                
+        return new ModelMapper().map(medico, UMedico.class);        
     }
 
     /**
@@ -64,8 +68,23 @@ public class MedicoService implements IMedicoService {
      * @throws NoContentException 
      */
     @Override
-    public List<Medico> leer() throws NoContentException {
-        return medicoRepository.leer();
+    public List<UMedico> leer() throws NoContentException {
+        
+        List<Medico> listaMedicos = medicoRepository.leer();
+        
+        if (listaMedicos.size() > 0) {
+            
+            List<UMedico> lista = new ArrayList<>();
+            ModelMapper modelMapper = new ModelMapper();
+            
+            for (Medico medico: listaMedicos)
+                lista.add(modelMapper.map(medico, UMedico.class));
+            
+            return lista;
+            
+        } else
+            throw new NoContentException("");                
+            
     }
 
     /**
@@ -77,7 +96,7 @@ public class MedicoService implements IMedicoService {
     public void actualizar(Medico medico) throws NotFoundException {
         if (medicoRepository.cantidadId("QMedicos", medico.getId()) == 1) {
             
-            medico.getDireccion().setMedico(medico);
+            //medico.getDireccion().setMedico(medico);
             medicoRepository.actualizar(medico);
             
         } else

@@ -3,6 +3,7 @@ package com.hospitalejbmodule.service.interfaz;
 
 // Librerías
 import com.hospitalejbmodule.entity.Consulta;
+import com.hospitalejbmodule.utilitarie.UConsulta;
 import javax.ejb.Local;
 
 /**
@@ -12,6 +13,6 @@ import javax.ejb.Local;
  * @since 05/05/2021
  */
 @Local
-public interface IConsultaService extends IGenericaService<Consulta> {
+public interface IConsultaService extends IGenericaService<Consulta, UConsulta> {
     
 }

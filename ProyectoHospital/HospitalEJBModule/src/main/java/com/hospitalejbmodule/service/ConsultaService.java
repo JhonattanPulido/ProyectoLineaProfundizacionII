@@ -9,10 +9,14 @@ import com.hospitalejbmodule.excepciones.NotFoundException;
 import com.hospitalejbmodule.repository.interfaz.IConsultaRepository;
 import com.hospitalejbmodule.repository.interfaz.IMedicoRepository;
 import com.hospitalejbmodule.service.interfaz.IConsultaService;
+import com.hospitalejbmodule.utilitarie.UConsulta;
+import com.hospitalejbmodule.utilitarie.UDetalleConsulta;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.NoContentException;
+import org.modelmapper.ModelMapper;
 
 /**
  * Capa de servicios de consulta
@@ -62,8 +66,9 @@ public class ConsultaService implements IConsultaService {
      * @throws NotFoundException 
      */
     @Override
-    public Consulta leer(short id) throws NotFoundException {
-        return consultaRepository.leer("LeerConsulta", id);
+    public UConsulta leer(short id) throws NotFoundException {
+        Consulta consulta = consultaRepository.leer("LeerConsulta", id);
+        return new ModelMapper().map(consulta, UConsulta.class);
     }
 
     /**
@@ -72,8 +77,39 @@ public class ConsultaService implements IConsultaService {
      * @throws NoContentException 
      */
     @Override
-    public List<Consulta> leer() throws NoContentException {
-        return consultaRepository.leer();
+    public List<UConsulta> leer() throws NoContentException {
+        
+        List<Consulta> listaConsultas = consultaRepository.leer();
+        
+        if (listaConsultas.size() > 0) {
+            
+            UConsulta uConsulta = new UConsulta();
+            UDetalleConsulta uDetalleConsulta = new UDetalleConsulta();
+            List<UConsulta> lista = new ArrayList<>();
+            List<UDetalleConsulta> listaDC = new ArrayList<>();
+            ModelMapper modelMapper = new ModelMapper();
+            
+            for (Consulta consulta: listaConsultas) {
+                
+                listaDC.clear();
+                
+                for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas()) {
+                    uDetalleConsulta = modelMapper.map(detalleConsulta, UDetalleConsulta.class);
+                    uDetalleConsulta.setConsulta(null);
+                    listaDC.add(uDetalleConsulta);
+                }                    
+                
+                uConsulta = modelMapper.map(consulta, UConsulta.class);
+                uConsulta.setListaDetallesConsultas(listaDC);
+                
+                lista.add(uConsulta);
+                
+            }                
+                        
+            return lista;
+            
+        } else
+            throw new NoContentException("");
     }
 
     /**

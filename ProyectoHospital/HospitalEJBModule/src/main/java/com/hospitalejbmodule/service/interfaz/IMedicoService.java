@@ -3,6 +3,7 @@ package com.hospitalejbmodule.service.interfaz;
 
 // Librerías
 import com.hospitalejbmodule.entity.Medico;
+import com.hospitalejbmodule.utilitarie.UMedico;
 import javax.ejb.Local;
 
 /** 
@@ -12,6 +13,6 @@ import javax.ejb.Local;
  * @since 05/05/2021
  */
 @Local
-public interface IMedicoService extends IGenericaService<Medico> {
+public interface IMedicoService extends IGenericaService<Medico, UMedico> {
     
 }

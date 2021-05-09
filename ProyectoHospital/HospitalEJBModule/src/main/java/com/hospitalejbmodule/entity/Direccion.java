@@ -2,6 +2,7 @@
 package com.hospitalejbmodule.entity;
 
 // Librerías
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
@@ -53,10 +54,8 @@ public class Direccion implements Serializable {
     /**
      * Médico asociado
      */
-    @OneToOne    
-    @JsonbTransient    
-    @JoinColumn(name = "medico_id")    
-    @NotNull(message = "El médico asociado es necesario")
+    @OneToOne      
+    @JoinColumn(name = "medico_id")       
     private Medico medico;
 
     /**
@@ -92,6 +91,7 @@ public class Direccion implements Serializable {
         this.direccionDetallada = direccionDetallada;
     }
 
+    @JsonbTransient
     public Medico getMedico() {
         return medico;
     }

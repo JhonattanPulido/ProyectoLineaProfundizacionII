@@ -4,6 +4,7 @@ package com.hospitalejbmodule.repository;
 // Librerías
 import com.hospitalejbmodule.entity.Medico;
 import com.hospitalejbmodule.repository.interfaz.IMedicoRepository;
+import com.hospitalejbmodule.utilitarie.UMedico;
 import javax.ejb.Stateless;
 
 /**

@@ -70,15 +70,14 @@ public class Medico implements Serializable {
     /**
      * Dirección asociada
      */
-    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)    
+    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)            
     private Direccion direccion;
     
     /**
      * Lista de consultas
-     */
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonbTransient
-    private List<Consulta> listaConsultas;
+     */    
+    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)    
+    private Consulta consulta;
 
     /**
      * Constructor
@@ -120,7 +119,7 @@ public class Medico implements Serializable {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }        
-
+    
     public Direccion getDireccion() {
         return direccion;
     }
@@ -129,12 +128,13 @@ public class Medico implements Serializable {
         this.direccion = direccion;
     }        
 
-    public List<Consulta> getListaConsultas() {
-        return listaConsultas;
+    @JsonbTransient
+    public Consulta getConsulta() {
+        return consulta;
     }
 
-    public void setListaConsultas(List<Consulta> listaConsultas) {
-        this.listaConsultas = listaConsultas;
-    }        
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }
     
 }

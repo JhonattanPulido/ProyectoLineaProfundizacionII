@@ -67,7 +67,7 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     @Override
     public T leer(String queryName, short id) throws    NotFoundException {
         try {
-            return (T) em.createNamedQuery(queryName, classType).setParameter("id", id).getSingleResult();
+            return (T) em.createNamedQuery(queryName, classType).setParameter("id", id).getSingleResult();                                   
         } catch (NoResultException ex) {
             throw new NotFoundException("No se encontró el registro");
         }
