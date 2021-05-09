@@ -40,6 +40,17 @@ public class ConsultaService implements IConsultaService {
      */
     @EJB
     private IMedicoRepository medicoRepository;
+    
+    /**
+     * Model mapper
+     */
+    private ModelMapper modelMapper;
+    
+    private UConsulta uConsulta;
+    
+    private UDetalleConsulta uDetalleConsulta;
+    
+    List<UDetalleConsulta> listaDC = new ArrayList<>();            
 
     // Métodos
     
@@ -67,8 +78,22 @@ public class ConsultaService implements IConsultaService {
      */
     @Override
     public UConsulta leer(short id) throws NotFoundException {
+        
         Consulta consulta = consultaRepository.leer("LeerConsulta", id);
-        return new ModelMapper().map(consulta, UConsulta.class);
+        
+        modelMapper = new ModelMapper();
+        
+        for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas()) {
+            uDetalleConsulta = modelMapper.map(detalleConsulta, UDetalleConsulta.class);
+            uDetalleConsulta.setConsulta(null);
+            listaDC.add(uDetalleConsulta);
+        }
+        
+        uConsulta = modelMapper.map(consulta, UConsulta.class);
+        uConsulta.setListaDetallesConsultas(listaDC);
+        
+        return uConsulta;
+        
     }
 
     /**
@@ -83,11 +108,9 @@ public class ConsultaService implements IConsultaService {
         
         if (listaConsultas.size() > 0) {
             
-            UConsulta uConsulta = new UConsulta();
-            UDetalleConsulta uDetalleConsulta = new UDetalleConsulta();
-            List<UConsulta> lista = new ArrayList<>();
-            List<UDetalleConsulta> listaDC = new ArrayList<>();
-            ModelMapper modelMapper = new ModelMapper();
+            modelMapper = new ModelMapper();
+                        
+            List<UConsulta> lista = new ArrayList<>();            
             
             for (Consulta consulta: listaConsultas) {
                 
@@ -96,7 +119,7 @@ public class ConsultaService implements IConsultaService {
                 for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas()) {
                     uDetalleConsulta = modelMapper.map(detalleConsulta, UDetalleConsulta.class);
                     uDetalleConsulta.setConsulta(null);
-                    listaDC.add(uDetalleConsulta);
+                    listaDC.add(uDetalleConsulta);                    
                 }                    
                 
                 uConsulta = modelMapper.map(consulta, UConsulta.class);
@@ -129,6 +152,6 @@ public class ConsultaService implements IConsultaService {
         } else
             throw new NotFoundException("No se encontró la consulta");
                 
-    }
+    }   
     
 }

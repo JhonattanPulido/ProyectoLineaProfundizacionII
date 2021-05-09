@@ -14,5 +14,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface IConsultaService extends IGenericaService<Consulta, UConsulta> {
-    
+                    
 }

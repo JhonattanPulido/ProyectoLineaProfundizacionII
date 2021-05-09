@@ -48,4 +48,5 @@ public interface IGenericaService<T, U> {
      * @throws NotFoundException 
      */
     public void actualizar(T t) throws NotFoundException;
+        
 }
