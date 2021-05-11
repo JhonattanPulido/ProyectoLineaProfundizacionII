@@ -3,7 +3,6 @@ package com.hospitalejbmodule.entity;
 
 // Librerías
 import java.io.Serializable;
-import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -29,9 +27,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "medicos", schema = "public")
 @NamedQueries({
+    @NamedQuery(name = "QMedicosT", query = "SELECT COUNT(m) FROM Medico m"),
     @NamedQuery(name = "QMedicos", query = "SELECT COUNT(m.id) FROM Medico m WHERE m.id = :id"),
     @NamedQuery(name = "QMedicosEmail", query = "SELECT COUNT(m.correoElectronico) FROM Medico m WHERE m.correoElectronico = :correo_electronico"),
-    @NamedQuery(name = "LeerMedico", query = "SELECT m FROM Medico m WHERE m.id = :id")
+    @NamedQuery(name = "LeerMedico", query = "SELECT m FROM Medico m WHERE m.id = :id"),
+    @NamedQuery(name = "LeerMedicos", query = "SELECT m FROM Medico m ORDER BY m.id ASC")
 })
 public class Medico implements Serializable {
     

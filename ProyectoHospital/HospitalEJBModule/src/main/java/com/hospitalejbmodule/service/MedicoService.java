@@ -13,6 +13,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.NoContentException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 
 /**
@@ -30,7 +32,7 @@ public class MedicoService implements IMedicoService {
      * Datos de médico
      */
     @EJB
-    private IMedicoRepository medicoRepository;
+    private IMedicoRepository medicoRepository;        
     
     // Métodos
 
@@ -102,5 +104,47 @@ public class MedicoService implements IMedicoService {
         } else
             throw new NotFoundException("No se encontró el médico");
     }
+
+    /**
+     * Cantidad total de médicos
+     * @return 
+     */
+    @Override
+    public long cantidadRegistros() {
+        return medicoRepository.cantidadTotal("QMedicosT");
+    }
+    
+    /**
+     * Paginar médicos
+     * @param inicio
+     * @return 
+     */
+    @Override
+    public String paginar(short inicio, short cantidad) throws   NoContentException {
+        
+        List<Medico> listaMedicos = medicoRepository.paginar("LeerMedicos", (short) (inicio * cantidad), cantidad);
+        
+        if (listaMedicos.size() > 0) {
+            
+            List<UMedico> lista = new ArrayList<>();
+            ModelMapper modelMapper = new ModelMapper();
+            
+            for (Medico medico: listaMedicos)
+                lista.add(modelMapper.map(medico, UMedico.class));
+            
+            JSONObject json = new JSONObject();
+            JSONObject jsonAux = new JSONObject();
+            JSONArray jsonArray = new JSONArray();
+        
+            json.put("cantidadTotal", cantidadRegistros());
+            json.put("lista", jsonArray.put(lista));
+            
+            return json.toString();
+            
+        } else
+            throw new NoContentException(""); 
+        
+        
+    }   
     
 }

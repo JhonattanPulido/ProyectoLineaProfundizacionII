@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NoContentException;
 import javax.ws.rs.core.Response;
+import org.json.*;
 
 /**
  * Controlado de médico
@@ -105,6 +106,24 @@ public class MedicoController implements Serializable {
         medicoService.actualizar(medico);
         
         return Response.status(Response.Status.OK)
+                        .build();
+        
+    }
+    
+    /**
+     * Paginar médicos
+     * @param inicio
+     * @param cantidad
+     * @return
+     * @throws NoContentException 
+     */
+    @GET
+    @Path("/all/{inicio}/{cantidad}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response paginar(@PathParam("inicio") Short inicio, @PathParam("cantidad") Short cantidad) throws    NoContentException {            
+        
+        return Response.status(Response.Status.OK)
+                        .entity(medicoService.paginar(inicio, cantidad))
                         .build();
         
     }

@@ -6,14 +6,15 @@ import com.hospitalejbmodule.excepciones.IntegridadException;
 import com.hospitalejbmodule.excepciones.NotFoundException;
 import java.util.List;
 import javax.ws.rs.core.NoContentException;
+import org.json.JSONObject;
 
 /**
  * Interfaz de la capa de servicios de genérica
  * @author Jhonattan Pulido
  * @version 1.0.0
  * @since 05/05/2021
- * @param <T>
- * @param <U>
+ * @param <T> - Entidad
+ * @param <U> - Utilitario 
  */
 public interface IGenericaService<T, U> {
     
@@ -47,6 +48,21 @@ public interface IGenericaService<T, U> {
      * @param t
      * @throws NotFoundException 
      */
-    public void actualizar(T t) throws NotFoundException;
+    public void actualizar(T t) throws NotFoundException; 
+    
+    /**
+     * Cantidad de registros en una tabla     
+     * @return 
+     */
+    public long cantidadRegistros();
+    
+    /**
+     * Paginar registros
+     * @param inicio
+     * @param cantidad      
+     * @return 
+     * @throws NoContentException
+     */
+    public String paginar(short inicio, short cantidad) throws NoContentException;
         
 }

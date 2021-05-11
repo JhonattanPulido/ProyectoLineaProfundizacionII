@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,7 +21,7 @@ import javax.persistence.criteria.Root;
  * @author Jhonattan Pulido
  * @version 1.0.0
  * @since 05/05/2021
- * @param <T>
+ * @param <T>  
  */
 public class GenericaRepository<T> implements IGenericaRepository<T> {
 
@@ -35,15 +36,15 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     /**
      * Almacena el tipo de clase que se desea usar
      */
-    private final Class<T> classType;
-
+    private final Class<T> classType;           
+    
     /**
      * Constructor     
      */
     public GenericaRepository() {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
-        classType = (Class) pt.getActualTypeArguments()[0];
+        classType = (Class) pt.getActualTypeArguments()[0];                 
     }        
     
     // Métodos
@@ -97,6 +98,16 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     }
 
     /**
+     * Cantidad total de registros de una tabla
+     * @param queryName 
+     * @return 
+     */
+    @Override
+    public long cantidadTotal(String queryName) {
+        return (long) em.createNamedQuery(queryName, long.class).getSingleResult();
+    }
+    
+    /**
      * Cantidad de registros con un ID
      * @param queryName
      * @param id
@@ -110,6 +121,21 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     @Override
     public void eliminar(T t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }    
+    
+    /**
+     * Paginar registros
+     * @param queryName
+     * @param inicio
+     * @param cantidad
+     * @return 
+     */
+    @Override
+    public List<T> paginar(String queryName, short inicio, short cantidad) {       
+        Query query = em.createNamedQuery(queryName, classType);                                             
+        query.setFirstResult(inicio);
+        query.setMaxResults(cantidad);                                    
+        return query.getResultList();
+    }    
     
 }

@@ -31,6 +31,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "consultas", schema = "public")
 @NamedQueries({
+    @NamedQuery(name = "QConsultasT", query = "SELECT COUNT(c) FROM Consulta c"),
     @NamedQuery(name = "QConsultas", query = "SELECT COUNT(c.id) FROM Consulta c WHERE c.id = :id"),
     @NamedQuery(name = "LeerConsulta", query = "SELECT c FROM Consulta c WHERE c.id = :id")
 })

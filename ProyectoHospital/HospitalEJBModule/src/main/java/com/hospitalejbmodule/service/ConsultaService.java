@@ -16,6 +16,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.NoContentException;
+import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 
 /**
@@ -153,5 +154,19 @@ public class ConsultaService implements IConsultaService {
             throw new NotFoundException("No se encontró la consulta");
                 
     }   
+
+    /**
+     * Cantidad de consultas
+     * @return 
+     */
+    @Override
+    public long cantidadRegistros() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public String paginar(short inicio, short cantidad) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
     
 }

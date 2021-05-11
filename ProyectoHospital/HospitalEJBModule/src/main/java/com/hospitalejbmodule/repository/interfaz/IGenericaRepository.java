@@ -10,7 +10,7 @@ import java.util.List;
  * @author Jhonattan Pulido
  * @version 1.0.0
  * @since 05/05/2021
- * @param <T>
+ * @param <T>  
  */
 public interface IGenericaRepository<T> {
     
@@ -50,6 +50,13 @@ public interface IGenericaRepository<T> {
     public void eliminar(T t);
     
     /**
+     * Cantidad total de registros de una tabla
+     * @param queryName
+     * @return 
+     */
+    public long cantidadTotal(String queryName);
+    
+    /**
      * Cantidad de registros con un ID
      * @param queryName
      * @param id
@@ -57,4 +64,13 @@ public interface IGenericaRepository<T> {
      */
     public long cantidadId(String queryName, short id);
     
+    /**
+     * Páginar registros
+     * @param inicio
+     * @param cantidad
+     * @param queryName 
+     * @return 
+     */
+    public List<T> paginar(String queryName, short inicio, short cantidad);
+        
 }

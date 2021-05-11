@@ -26,6 +26,14 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- JSON -->        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+        
     </dependencies>
 
     <build>
