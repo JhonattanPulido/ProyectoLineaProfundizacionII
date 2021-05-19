@@ -41,13 +41,7 @@ public interface IGenericaRepository<T> {
      * Actualizar registro
      * @param t 
      */
-    public void actualizar(T t);
-    
-    /**
-     * Eliminar registro
-     * @param t 
-     */
-    public void eliminar(T t);
+    public void actualizar(T t);                
     
     /**
      * Cantidad total de registros de una tabla

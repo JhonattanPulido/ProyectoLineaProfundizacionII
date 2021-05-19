@@ -115,4 +115,22 @@ public class ConsultaController implements Serializable {
         
     }
     
+    /**
+     * Paginar consultas
+     * @param inicio
+     * @param cantidad
+     * @return
+     * @throws NoContentException 
+     */
+    @GET
+    @Path("/all/{inicio}/{cantidad}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response leer(@PathParam("inicio") Short inicio, @PathParam("cantidad") Short cantidad) throws  NoContentException {
+    
+        return Response.status(Response.Status.OK)
+                        .entity(consultaService.paginar(inicio, cantidad))
+                        .build();
+        
+    }
+    
 }

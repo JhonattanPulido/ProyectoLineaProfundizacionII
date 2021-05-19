@@ -14,4 +14,12 @@ import javax.ejb.Local;
 @Local
 public interface IConsultaRepository extends IGenericaRepository<Consulta> {
     
+    // Métodos
+    
+    /**
+     * Eliminar consulta
+     * @param consulta
+     */
+    public void eliminar(Consulta consulta);
+    
 }

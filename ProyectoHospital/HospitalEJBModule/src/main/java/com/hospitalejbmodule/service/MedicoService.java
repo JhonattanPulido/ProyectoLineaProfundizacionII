@@ -124,7 +124,7 @@ public class MedicoService implements IMedicoService {
         
         List<Medico> listaMedicos = medicoRepository.paginar("LeerMedicos", (short) (inicio * cantidad), cantidad);
         
-        if (listaMedicos.size() > 0) {
+        if (listaMedicos.size() > 0) {                        
             
             List<UMedico> lista = new ArrayList<>();
             ModelMapper modelMapper = new ModelMapper();
@@ -132,12 +132,10 @@ public class MedicoService implements IMedicoService {
             for (Medico medico: listaMedicos)
                 lista.add(modelMapper.map(medico, UMedico.class));
             
-            JSONObject json = new JSONObject();
-            JSONObject jsonAux = new JSONObject();
-            JSONArray jsonArray = new JSONArray();
+            JSONObject json = new JSONObject();                        
         
             json.put("cantidadTotal", cantidadRegistros());
-            json.put("lista", jsonArray.put(lista));
+            json.put("lista", new JSONArray().put(lista));
             
             return json.toString();
             
@@ -146,5 +144,15 @@ public class MedicoService implements IMedicoService {
         
         
     }   
+
+    @Override
+    public void eliminar(short id) throws NotFoundException {                
+        
+        if (medicoRepository.cantidadId("QMedicos", id) == 1)        
+            medicoRepository.eliminar(medicoRepository.leer("LeerMedico", id));            
+        else
+            throw new NotFoundException("No se encontró el médico");
+        
+    }
     
 }

@@ -4,6 +4,7 @@ package com.hospitalejbmodule.repository.interfaz;
 // Librerías
 import javax.ejb.Local;
 import com.hospitalejbmodule.entity.Medico;
+import com.hospitalejbmodule.excepciones.NotFoundException;
 
 /**
  * Interfaz de la capa de datos de médico
@@ -17,10 +18,16 @@ public interface IMedicoRepository extends IGenericaRepository<Medico> {
     // Métodos
     
     /**
+     * Eliminar registro
+     * @param medico
+     */
+    public void eliminar(Medico medico) throws  NotFoundException;
+    
+    /**
      * Cantidad de médicos con un correo electrónico
      * @param correoElectronico
      * @return 
      */
     public long cantidadEmail(String correoElectronico);
-    
+        
 }

@@ -14,5 +14,10 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class ConsultaRepository extends GenericaRepository<Consulta> implements IConsultaRepository {
+
+    @Override
+    public void eliminar(Consulta consulta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

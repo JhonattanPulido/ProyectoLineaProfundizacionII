@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,6 +26,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "direcciones", schema = "public")
+@NamedQueries({
+    @NamedQuery(name = "EliminarDireccion", query = "DELETE FROM Direccion d WHERE d.medico.id = :medico_id")
+})
 public class Direccion implements Serializable {
         
     // Variables

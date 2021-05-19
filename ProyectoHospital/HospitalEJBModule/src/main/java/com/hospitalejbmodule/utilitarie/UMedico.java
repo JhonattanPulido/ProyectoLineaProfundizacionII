@@ -2,6 +2,7 @@
 package com.hospitalejbmodule.utilitarie;
 
 // Librería
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 
 /**
@@ -37,6 +38,7 @@ public class UMedico implements Serializable {
     /**
      * Dirección asociada
      */
+    @JsonManagedReference
     private UDireccion direccion;
 
     /**

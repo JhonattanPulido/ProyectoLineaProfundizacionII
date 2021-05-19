@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -128,4 +129,21 @@ public class MedicoController implements Serializable {
         
     }
     
+    /**
+     * Eliminar médico
+     * @param id
+     * @return
+     * @throws NotFoundException 
+     */
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminar(@PathParam("id") Short id) throws  NotFoundException {
+        
+        medicoService.eliminar(id);
+        
+        return Response.status(Response.Status.OK)
+                        .build();
+        
+    }
 }

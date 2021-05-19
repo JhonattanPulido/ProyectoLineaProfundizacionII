@@ -4,6 +4,7 @@ package com.hospitalejbmodule.service;
 // Librerías
 import com.hospitalejbmodule.entity.Consulta;
 import com.hospitalejbmodule.entity.DetalleConsulta;
+import com.hospitalejbmodule.entity.Medico;
 import com.hospitalejbmodule.excepciones.IntegridadException;
 import com.hospitalejbmodule.excepciones.NotFoundException;
 import com.hospitalejbmodule.repository.interfaz.IConsultaRepository;
@@ -11,11 +12,13 @@ import com.hospitalejbmodule.repository.interfaz.IMedicoRepository;
 import com.hospitalejbmodule.service.interfaz.IConsultaService;
 import com.hospitalejbmodule.utilitarie.UConsulta;
 import com.hospitalejbmodule.utilitarie.UDetalleConsulta;
+import com.hospitalejbmodule.utilitarie.UMedico;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.NoContentException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 
@@ -164,9 +167,56 @@ public class ConsultaService implements IConsultaService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Paginar consultas
+     * @param inicio
+     * @param cantidad
+     * @return
+     * @throws NoContentException 
+     */
     @Override
-    public String paginar(short inicio, short cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String paginar(short inicio, short cantidad) throws NoContentException {
+        
+        List<Consulta> listaConsultas = consultaRepository.paginar("LeerConsultas", (short) (inicio * cantidad), cantidad);
+        
+        if (listaConsultas.size() > 0) {                        
+            
+            modelMapper = new ModelMapper();
+                        
+            List<UConsulta> lista = new ArrayList<>();            
+            
+            for (Consulta consulta: listaConsultas) {
+                
+                listaDC.clear();
+                
+                for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas()) {
+                    uDetalleConsulta = modelMapper.map(detalleConsulta, UDetalleConsulta.class);
+                    uDetalleConsulta.setConsulta(null);
+                    listaDC.add(uDetalleConsulta);                    
+                }                    
+                
+                uConsulta = modelMapper.map(consulta, UConsulta.class);
+                uConsulta.setListaDetallesConsultas(listaDC);
+                
+                lista.add(uConsulta);
+                
+            }
+            
+            JSONObject json = new JSONObject();                        
+        
+            json.put("cantidadTotal", cantidadRegistros());
+            json.put("lista", new JSONArray().put(lista));
+            
+            return json.toString();
+            
+        } else
+            throw new NoContentException(""); 
+        
     }    
+
+    @Override
+    public void eliminar(short id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

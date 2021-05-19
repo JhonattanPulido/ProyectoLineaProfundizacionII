@@ -31,7 +31,9 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "QMedicos", query = "SELECT COUNT(m.id) FROM Medico m WHERE m.id = :id"),
     @NamedQuery(name = "QMedicosEmail", query = "SELECT COUNT(m.correoElectronico) FROM Medico m WHERE m.correoElectronico = :correo_electronico"),
     @NamedQuery(name = "LeerMedico", query = "SELECT m FROM Medico m WHERE m.id = :id"),
-    @NamedQuery(name = "LeerMedicos", query = "SELECT m FROM Medico m ORDER BY m.id ASC")
+    @NamedQuery(name = "LeerMedicos", query = "SELECT m FROM Medico m ORDER BY m.id ASC"),
+    @NamedQuery(name = "EliminarMedico", query = "DELETE FROM Medico m WHERE m.id = :id")
+    
 })
 public class Medico implements Serializable {
     

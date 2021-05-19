@@ -51,6 +51,12 @@ public interface IGenericaService<T, U> {
     public void actualizar(T t) throws NotFoundException; 
     
     /**
+     * Eliminar registro
+     * @param id
+     */
+    public void eliminar(short id) throws    NotFoundException;
+    
+    /**
      * Cantidad de registros en una tabla     
      * @return 
      */

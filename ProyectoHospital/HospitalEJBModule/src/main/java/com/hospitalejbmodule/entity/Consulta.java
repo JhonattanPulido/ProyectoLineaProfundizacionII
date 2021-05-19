@@ -33,7 +33,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "QConsultasT", query = "SELECT COUNT(c) FROM Consulta c"),
     @NamedQuery(name = "QConsultas", query = "SELECT COUNT(c.id) FROM Consulta c WHERE c.id = :id"),
-    @NamedQuery(name = "LeerConsulta", query = "SELECT c FROM Consulta c WHERE c.id = :id")
+    @NamedQuery(name = "LeerConsulta", query = "SELECT c FROM Consulta c WHERE c.id = :id"),
+    @NamedQuery(name = "LeerConsultas", query = "SELECT c FROM Consulta c ORDER BY c.id ASC"),
 })
 public class Consulta implements Serializable {
     
