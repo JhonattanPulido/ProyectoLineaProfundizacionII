@@ -1,0 +1,93 @@
+<div class="contenedor">
+    
+    <br>   
+    <br>
+    <h1 style="width: 100%; font-weight: 500; text-align: center;">Registro de médico</h1>    
+
+    <form class="form" [formGroup]="formGroup" (ngSubmit)="crearMedico()">
+
+        <div class="form-cntr">
+        
+            <br>   
+            <br>
+            <mat-card-title>Informacion personal</mat-card-title>   
+            <br>   
+            <br>
+
+            <p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Ingrese el nombre" formControlName="nombre">
+                    <mat-icon matSuffix>edit</mat-icon>
+                    <mat-hint>Mínimo 2 y máximo 26 letras</mat-hint>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Ingrese el apellido" formControlName="apellido">
+                    <mat-icon matSuffix>edit</mat-icon>
+                    <mat-hint>Mínimo 2 y máximo 26 letras</mat-hint>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput placeholder="Ingrese el correo electrónico" formControlName="email">
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                    <mat-hint>alguien@host.com</mat-hint>                    
+                </mat-form-field>
+            </p>
+
+            <p>
+
+            </p>                
+
+        </div>                    
+
+        <div class="form-cntr">
+            
+            <br>   
+            <br>
+            <mat-card-title>Dirección</mat-card-title> 
+            <br>   
+            <br>
+
+            <p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Código postal</mat-label>
+                    <input matInput placeholder="Ingrese el código postal" formControlName="codigoPostal">
+                    <mat-icon matSuffix>tag</mat-icon>
+                    <mat-hint>Debe tener 6 dígitos</mat-hint>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Detalle</mat-label>
+                    <input matInput placeholder="Ingrese la dirección detallada" formControlName="direccionDetallada">
+                    <mat-icon matSuffix>edit</mat-icon>
+                    <mat-hint>Mínimo 8 y máximo 80 letras</mat-hint>
+                </mat-form-field>
+            </p>
+
+            <p>
+
+            </p>
+
+            <p>
+                <button type="submit" color="primary" style="float: right;" mat-fab aria-label="Example icon-button with a heart icon">
+                    <mat-icon>done</mat-icon>
+                </button>
+            </p>
+        
+        </div>
+
+    </form>
+
+    <br>   
+    <br>
+
+</div>

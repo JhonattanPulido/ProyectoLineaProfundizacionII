@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.udecsanitas.udecsanitasweb.controller.exception.filter.ExceptionFilter.class);
         resources.add(com.udecsanitas.udecsanitasweb.controller.exception.filter.IntegridadExceptionFilter.class);
         resources.add(com.udecsanitas.udecsanitasweb.controller.exception.filter.NotFoundExceptionFilter.class);
+        resources.add(com.udecsanitas.udecsanitasweb.pojo.CorsPolicy.class);
     }
     
 }

@@ -1,6 +1,7 @@
-C:\Users\jhona\Documents\NetBeansProjects\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\exception\filter\IntegridadExceptionFilter.java
-C:\Users\jhona\Documents\NetBeansProjects\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\exception\filter\ExceptionFilter.java
-C:\Users\jhona\Documents\NetBeansProjects\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\pojo\ErrorDto.java
-C:\Users\jhona\Documents\NetBeansProjects\ProyectoHospital\UdeCSanitasWeb\src\main\java\org\netbeans\rest\application\config\ApplicationConfig.java
-C:\Users\jhona\Documents\NetBeansProjects\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\MedicoController.java
-C:\Users\jhona\Documents\NetBeansProjects\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\exception\filter\NotFoundExceptionFilter.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\org\netbeans\rest\application\config\ApplicationConfig.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\exception\filter\IntegridadExceptionFilter.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\pojo\CorsPolicy.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\exception\filter\NotFoundExceptionFilter.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\exception\filter\ExceptionFilter.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\pojo\ErrorDto.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitasWeb\src\main\java\com\udecsanitas\udecsanitasweb\controller\MedicoController.java
