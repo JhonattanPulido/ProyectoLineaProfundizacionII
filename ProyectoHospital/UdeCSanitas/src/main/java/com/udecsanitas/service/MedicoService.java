@@ -8,15 +8,13 @@ import javax.ejb.Stateless;
 import org.modelmapper.ModelMapper;
 import com.udecsanitas.entity.Medico;
 import com.udecsanitas.utilitarie.UMedico;
-import javax.ws.rs.core.NoContentException;
 import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.exception.NotFoundException;
+import com.udecsanitas.utilitarie.UMedicoPaginador;
 import com.udecsanitas.exception.IntegridadException;
+import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.service.interfaz.IMedicoService;
 import com.udecsanitas.repository.interfaz.IMedicoRepository;
-import com.udecsanitas.utilitarie.UMedicoPaginador;
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
 
 /**
  * Capa de servicios de médico
@@ -78,7 +76,11 @@ public class MedicoService implements IMedicoService {
         
         if (listaMedicos.size() > 0) {
             
-            UMedicoPaginador medicos = new UMedicoPaginador(inicio, (short) medicoRepository.cantidadTotal("QMedicosT")){};
+            UMedicoPaginador medicos = new UMedicoPaginador(
+                inicio,
+                (short) medicoRepository.cantidadTotal("QMedicosT"),
+                cantidad
+            ){};
             ModelMapper modelMapper = new ModelMapper();            
             UMedico med;                     
             
@@ -88,6 +90,8 @@ public class MedicoService implements IMedicoService {
                 //med.getDireccion().setMedico(null);
                 medicos.getLista().add(med);
             }                                 
+            
+            System.out.println("Total páginas: " + medicos.getCantidadPaginas());
             
             return medicos;
             

@@ -2,8 +2,8 @@
 package com.udecsanitas.service.interfaz;
 
 // Librerías
-import javax.ws.rs.core.NoContentException;
 import com.udecsanitas.utilitarie.UPaginador;
+import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.exception.IntegridadException;
 
 /**

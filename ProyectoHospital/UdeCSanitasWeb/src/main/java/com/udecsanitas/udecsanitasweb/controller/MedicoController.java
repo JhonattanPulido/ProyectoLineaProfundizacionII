@@ -13,8 +13,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
 import com.udecsanitas.entity.Medico;
-import javax.ws.rs.core.NoContentException;
 import com.udecsanitas.exception.NotFoundException;
+import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.exception.IntegridadException;
 import com.udecsanitas.service.interfaz.IMedicoService;
 

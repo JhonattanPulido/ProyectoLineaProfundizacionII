@@ -17,9 +17,13 @@ public class UPaginador<T> implements Serializable {
 
     // Variables
     
+    private Double cantidadPaginas;
+    
     private Short paginaActual;
     
     private Short cantidadTotal;
+    
+    private Short cantidadMostrar;
     
     private List<T> lista;
 
@@ -31,14 +35,17 @@ public class UPaginador<T> implements Serializable {
     }   
     
     /**
-     * Construtor
+     * Constructor
      * @param paginaActual
-     * @param cantidadTotal 
+     * @param cantidadTotal  
+     * @param cantidadMostrar 
      */
-    public UPaginador(short paginaActual, short cantidadTotal) {
+    public UPaginador(short paginaActual, short cantidadTotal, short cantidadMostrar) {
         lista = new ArrayList<>();
         this.paginaActual = paginaActual;
         this.cantidadTotal = cantidadTotal;
+        this.cantidadMostrar = cantidadMostrar;
+        cantidadPaginas = (Math.ceil(cantidadTotal / cantidadMostrar) + 1);
     }
 
     // Métodos get & set
@@ -57,14 +64,22 @@ public class UPaginador<T> implements Serializable {
 
     public void setCantidadTotal(Short cantidadTotal) {
         this.cantidadTotal = cantidadTotal;
-    }
+    }        
 
+    public double getCantidadPaginas() {
+        return cantidadPaginas;
+    }    
+    
+    public Short getCantidadMostrar() {
+        return cantidadMostrar;
+    }
+    
     public List<T> getLista() {
         return lista;
     }
 
     public void setLista(List<T> lista) {
         this.lista = lista;
-    }        
+    }            
     
 }

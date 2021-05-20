@@ -1,6 +1,7 @@
 org\netbeans\rest\application\config\ApplicationConfig.class
 com\udecsanitas\udecsanitasweb\pojo\CorsPolicy.class
 com\udecsanitas\udecsanitasweb\controller\exception\filter\IntegridadExceptionFilter.class
+com\udecsanitas\udecsanitasweb\controller\exception\filter\NoContentExceptionFilter.class
 com\udecsanitas\udecsanitasweb\controller\exception\filter\ExceptionFilter.class
 com\udecsanitas\udecsanitasweb\controller\MedicoController.class
 com\udecsanitas\udecsanitasweb\pojo\ErrorDto.class

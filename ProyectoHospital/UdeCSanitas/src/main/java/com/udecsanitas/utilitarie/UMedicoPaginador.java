@@ -20,9 +20,10 @@ public class UMedicoPaginador extends  UPaginador<UMedico>{
      * Constructor
      * @param paginaActual
      * @param cantidadTotal 
+     * @param cantidadMostrar
      */
-    public UMedicoPaginador(short paginaActual, short cantidadTotal) {
-        super(paginaActual, cantidadTotal);
+    public UMedicoPaginador(short paginaActual, short cantidadTotal, short cantidadMostrar) {
+        super(paginaActual, cantidadTotal, cantidadMostrar);
     }        
     
 }

@@ -1,6 +1,7 @@
 com\udecsanitas\service\MedicoService.class
 com\udecsanitas\repository\interfaz\IMedicoRepository.class
 com\udecsanitas\repository\interfaz\IGenericaRepository.class
+com\udecsanitas\exception\NoContentException.class
 com\udecsanitas\utilitarie\UMedico.class
 com\udecsanitas\NewSessionBean.class
 com\udecsanitas\entity\Direccion.class
