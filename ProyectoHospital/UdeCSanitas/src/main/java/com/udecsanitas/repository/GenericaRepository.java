@@ -79,6 +79,15 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     }        
     
     /**
+     * Actualizar registro
+     * @param t - Registro
+     */
+    @Override
+    public void actualizar(T t) {
+        em.merge(t);
+    }
+    
+    /**
      * Cantidad de registros con un ID     
      * @param id 
      * @param queryName 
@@ -97,6 +106,6 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     @Override
     public long cantidadTotal(String queryName) {
         return (long) em.createNamedQuery(queryName, long.class).getSingleResult();
-    }    
+    }        
     
 }

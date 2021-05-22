@@ -29,4 +29,12 @@ public interface IMedicoRepository extends IGenericaRepository<Medico> {
      */
     public long cantidadEmail(String correoElectronico);
     
+    /**
+     * Validar correo electrónico para actualizar
+     * @param correoElectronico
+     * @param id
+     * @return cantidad de registros
+     */
+    public long validarEmail(String correoElectronico, short id);
+    
 }

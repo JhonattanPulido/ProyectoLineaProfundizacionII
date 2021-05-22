@@ -43,6 +43,12 @@ public interface IGenericaRepository<T> {
     public List<T> leer(String queryName, short inicio, short cantidad);        
     
     /**
+     * Actualizar
+     * @param t - Registro
+     */
+    public void actualizar(T t);
+    
+    /**
      * Cantidad total de registros con un id
      * @param queryName
      * @param id

@@ -2,7 +2,6 @@
 package com.udecsanitas.service.interfaz;
 
 // Librerías
-import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.exception.IntegridadException;
 import com.udecsanitas.exception.NotFoundException;
@@ -33,7 +32,7 @@ public interface IGenericaService<T, U> {
      * @return Lista de registros
      * @throws NoContentException
      */
-    public String leer(short inicio, short cantidad) throws NoContentException;
+    public String leer(short inicio, short cantidad) throws NoContentException;        
     
     /**
      * Eliminar registro

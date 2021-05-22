@@ -1,6 +1,7 @@
 // Librerías
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 // Entidades
 import { MedicoPaginador } from 'src/app/entidades/medico-paginador';
@@ -22,9 +23,12 @@ export class PaginarComponent implements OnInit {
   public medicoPaginador?: MedicoPaginador;
   public dataSource?: Medico[];
   public displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correoElectronico', 'acciones'];
+  private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  private verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   // Constructor
   constructor(
+    private snackBar: MatSnackBar,
     private medicoService: MedicoService,
     private activatedRoute: ActivatedRoute
   ) { }
@@ -52,7 +56,18 @@ export class PaginarComponent implements OnInit {
 
   // Eliminar médico
   public eliminarMedico(id: number) : void {
-    alert(id);
+    this.medicoService.eliminar(id)
+      .then(res => {
+        if (res == '0')
+          window.location.reload();
+        else {
+          this.snackBar.open(res, 'Cerrar', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          });
+        }
+
+      });
   }
 
   // Obtener parámetros de Url

@@ -43,6 +43,13 @@ export class MedicoService {
     });
   }
 
+  // Leer médico
+  public leer(id: number) : Promise<Medico | null> {
+    return new Promise(resolve => {
+      
+    });
+  }
+
   // Paginar médicos
   public paginar(inicio: number, cantidad: number) : Promise<MedicoPaginador | null> {
     return new Promise(resolve => {
@@ -66,6 +73,36 @@ export class MedicoService {
 
         }, (err: HttpErrorResponse) => {
           resolve(null);
+        });
+    });
+  }
+
+  // Actualizar médico
+  public actualizar(medico: Medico) : Promise<string> {
+    return new Promise(resolve => {
+      this.http.put(`${ webAPI }/medicos`, { medico }, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          resolve("0");
+        }, ((err: HttpErrorResponse) => {
+          if (err.status == 404 || err.status == 409)
+            resolve(err.error.mensaje);
+          else
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
+        }));
+    });
+  }
+
+  // Eliminar médico
+  public eliminar(id: number) : Promise<string> {
+    return new Promise(resolve => {
+      this.http.delete(`${ webAPI }/medicos/${ id }`, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          resolve("0");
+        }, (err: HttpErrorResponse) => {
+          if (err.status == 404)
+            resolve("No se encontró el médico");
+          else
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
         });
     });
   }

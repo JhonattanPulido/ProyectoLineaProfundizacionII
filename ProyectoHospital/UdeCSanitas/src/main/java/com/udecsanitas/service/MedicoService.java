@@ -108,6 +108,26 @@ public class MedicoService implements IMedicoService {
             throw new NoContentException("");
         
     }
+    
+    /**
+     * Actualizar médico
+     * @param medico
+     * @throws NotFoundException
+     */
+    @Override
+    public void actualizar(Medico medico) throws    NotFoundException,
+                                                    IntegridadException {
+        
+        if (medicoRepository.cantidadId("QMedicos", medico.getId()) == 1) {
+            if (medicoRepository.validarEmail(medico.getCorreoElectronico(), medico.getId()) == 0) {
+                medico.getDireccion().setMedico(medico);
+                medicoRepository.actualizar(medico);
+            } else
+                throw new IntegridadException("El correo electrónico ya está en uso");
+        } else
+            throw new NotFoundException("No se encontró el médico");
+        
+    }
 
     /**
      * Eliminar médico
@@ -122,6 +142,6 @@ public class MedicoService implements IMedicoService {
         else
             throw new NotFoundException("No se encontró el médico");
         
-    }
+    }    
     
 }

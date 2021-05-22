@@ -31,6 +31,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "QMedicosEmail", query = "SELECT COUNT(m) FROM Medico m WHERE m.correoElectronico = :correo_electronico"), // Cantidad de médicos con correo electónico
     @NamedQuery(name = "LeerMedico", query = "SELECT m FROM Medico m WHERE m.id = :id"), // Leer médico por ID
     @NamedQuery(name = "LeerMedicos", query = "SELECT m FROM Medico m ORDER BY m.id ASC"), // Leer todos los médicos
+    @NamedQuery(name = "ValidarEmail", query = "SELECT COUNT(m) FROM Medico m WHERE m.correoElectronico = :correo_electronico AND m.id <> :id"),
     @NamedQuery(name = "EliminarMedico", query = "DELETE FROM Medico m WHERE m.id = :id") // Eliminar médico
 })
 public class Medico implements Serializable {

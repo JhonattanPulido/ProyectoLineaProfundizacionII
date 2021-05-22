@@ -18,6 +18,7 @@ import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.exception.IntegridadException;
 import com.udecsanitas.service.interfaz.IMedicoService;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.PUT;
 
 /**
  * Controlador de médico
@@ -80,6 +81,24 @@ public class MedicoController {
     public Response leer(@PathParam("inicio") Short inicio, @PathParam("cantidad") Short cantidad) throws   NoContentException {
         return Response.status(Response.Status.OK)
                         .entity(medicoService.leer((short) inicio, (short) cantidad))
+                        .build();
+    }
+    
+    /**
+     * Actualizar médico
+     * @param medico
+     * @return 200
+     * @throws NotFoundException
+     * @throws IntegridadException 
+     */
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response actualizar(Medico medico) throws    NotFoundException,
+                                                        IntegridadException {
+        
+        medicoService.actualizar(medico);
+        return Response.status(Response.Status.OK)
                         .build();
     }
     

@@ -68,7 +68,7 @@ export class MedicosComponent implements OnInit {
       this.medicoService.crear(this.medico)
         .then((res: string) => {
           if (res == '0') {
-            this.router.navigateByUrl('/medicos/pag/0/10');
+            this.router.navigateByUrl('/medicos/pag/0/5');
           } else { // Encontró un error
             this.snackBar.open(res, 'Cerrar', {
               horizontalPosition: this.horizontalPosition,

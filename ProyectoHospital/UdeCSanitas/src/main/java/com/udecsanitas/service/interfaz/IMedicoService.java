@@ -4,6 +4,7 @@ package com.udecsanitas.service.interfaz;
 // Librerías
 import javax.ejb.Local;
 import com.udecsanitas.entity.Medico;
+import com.udecsanitas.exception.IntegridadException;
 import com.udecsanitas.utilitarie.UMedico;
 import com.udecsanitas.exception.NotFoundException;
 import com.udecsanitas.utilitarie.UMedicoPaginador;
@@ -27,5 +28,14 @@ public interface IMedicoService extends IGenericaService<Medico, UMedico> {
      * @throws NotFoundException 
      */
     public UMedico leer(short id, String direccion) throws  NotFoundException;
+    
+    /**
+     * Actualizar registro
+     * @param medico
+     * @throws NotFoundException
+     * @throws IntegridadException
+     */
+    public void actualizar(Medico medico) throws    NotFoundException,
+                                                    IntegridadException;
     
 }
