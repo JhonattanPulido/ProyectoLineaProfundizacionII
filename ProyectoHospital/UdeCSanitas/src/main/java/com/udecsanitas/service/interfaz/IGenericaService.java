@@ -5,6 +5,7 @@ package com.udecsanitas.service.interfaz;
 import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.exception.IntegridadException;
+import com.udecsanitas.exception.NotFoundException;
 
 /**
  * Interfaz de la capa de servicios de genérica
@@ -12,7 +13,7 @@ import com.udecsanitas.exception.IntegridadException;
  * @version 1.0.0
  * @since 18/05/2021
  * @param <T> - Entidad
- * @param <U> - Utilitario
+ * @param <U> - Utilitario  
  */
 public interface IGenericaService<T, U> {
     
@@ -32,6 +33,13 @@ public interface IGenericaService<T, U> {
      * @return Lista de registros
      * @throws NoContentException
      */
-    public UPaginador leer(short inicio, short cantidad) throws NoContentException;
+    public String leer(short inicio, short cantidad) throws NoContentException;
+    
+    /**
+     * Eliminar registro
+     * @param id - ID del registro
+     * @throws NotFoundException 
+     */
+    public void eliminar(short id) throws    NotFoundException;
     
 }

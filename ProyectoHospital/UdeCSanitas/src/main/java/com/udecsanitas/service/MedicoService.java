@@ -4,13 +4,14 @@ package com.udecsanitas.service;
 // Librerías
 import javax.ejb.EJB;
 import java.util.List;
+import java.util.ArrayList;
+import org.json.JSONObject;
 import javax.ejb.Stateless;
 import org.modelmapper.ModelMapper;
 import com.udecsanitas.entity.Medico;
 import com.udecsanitas.utilitarie.UMedico;
 import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.exception.NotFoundException;
-import com.udecsanitas.utilitarie.UMedicoPaginador;
 import com.udecsanitas.exception.IntegridadException;
 import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.service.interfaz.IMedicoService;
@@ -70,33 +71,56 @@ public class MedicoService implements IMedicoService {
      * @throws NoContentException
      */
     @Override
-    public UPaginador leer(short inicio, short cantidad) throws  NoContentException {
+    public String leer(short inicio, short cantidad) throws  NoContentException {
         
         List<Medico> listaMedicos = medicoRepository.leer("LeerMedicos", (short) (inicio * cantidad), cantidad);
         
-        if (listaMedicos.size() > 0) {
+        if (listaMedicos.size() > 0) {                        
             
-            UMedicoPaginador medicos = new UMedicoPaginador(
-                inicio,
-                (short) medicoRepository.cantidadTotal("QMedicosT"),
-                cantidad
-            ){};
-            ModelMapper modelMapper = new ModelMapper();            
             UMedico med;                     
+            ModelMapper modelMapper = new ModelMapper(); 
+            List<UMedico> lista = new ArrayList<>();
             
             for (Medico medico: listaMedicos) {
                 med = modelMapper.map(medico, UMedico.class);
-                med.setDireccion(null);
-                //med.getDireccion().setMedico(null);
-                medicos.getLista().add(med);
-            }                                 
+                med.getDireccion().setMedico(null);                
+                lista.add(med);
+            }    
             
-            System.out.println("Total páginas: " + medicos.getCantidadPaginas());
+            UPaginador medicos = new UPaginador(
+                inicio,
+                (short) medicoRepository.cantidadTotal("QMedicosT"),
+                cantidad,
+                lista                    
+            ){};
             
-            return medicos;
+            JSONObject json = new JSONObject();                        
+        
+            json.put("cantidadTotal", medicos.getCantidadTotal());
+            json.put("cantidadPaginas", medicos.getCantidadPaginas());
+            json.put("cantidadMostrar", medicos.getCantidadMostrar());
+            json.put("paginaActual", medicos.getPaginaActual());
+            json.put("lista", lista);             
+            
+            return json.toString();                       
             
         } else
             throw new NoContentException("");
+        
+    }
+
+    /**
+     * Eliminar médico
+     * @param id - ID del médico
+     * @throws NotFoundException 
+     */
+    @Override
+    public void eliminar(short id) throws  NotFoundException {
+        
+        if (medicoRepository.cantidadId("QMedicos", id) == 1)
+            medicoRepository.eliminar(medicoRepository.leer("LeerMedico", id));
+        else
+            throw new NotFoundException("No se encontró el médico");
         
     }
     

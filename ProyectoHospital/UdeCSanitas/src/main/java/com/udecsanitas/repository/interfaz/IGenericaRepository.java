@@ -40,7 +40,15 @@ public interface IGenericaRepository<T> {
      * @param cantidad - Cantidad a leer
      * @return Lista de registros
      */
-    public List<T> leer(String queryName, short inicio, short cantidad);
+    public List<T> leer(String queryName, short inicio, short cantidad);        
+    
+    /**
+     * Cantidad total de registros con un id
+     * @param queryName
+     * @param id
+     * @return 
+     */
+    public long cantidadId(String queryName, short id);
     
     /**
      * Cantidad total de registros

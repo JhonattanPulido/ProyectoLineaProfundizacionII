@@ -21,7 +21,7 @@ public class UMedico implements Serializable {
     private String apellido;
     
     private String correoElectronico;
-        
+            
     private UDireccion direccion;
 
     /**

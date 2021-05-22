@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Angular material
+import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -19,9 +21,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule
   ],
   exports: [
+    MatMenuModule,
     MatCardModule,
     MatIconModule,
     MatInputModule,
+    MatTableModule,
     MatButtonModule,
     MatDividerModule,
     MatSnackBarModule,

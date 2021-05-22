@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 
 // Entidades
 import { Medico } from '../entidades/medico.entity';
+import { MedicoPaginador } from 'src/app/entidades/medico-paginador';
 
 // Enviroment
 import { environment } from '../../environments/environment';
@@ -43,13 +44,28 @@ export class MedicoService {
   }
 
   // Paginar médicos
-  public paginar(inicio: number, cantidad: number) : Promise<any> {
+  public paginar(inicio: number, cantidad: number) : Promise<MedicoPaginador | null> {
     return new Promise(resolve => {
       this.http.get(`${ webAPI }/medicos/pag/${ inicio }/${ cantidad }`, { observe: 'response' })
-        .subscribe((res: HttpResponse<any>) => {
-          console.log(res);
+        .subscribe((res: HttpResponse<any>) => {          
+
+          if (res.status == 200) {
+
+            var medicoPaginado : MedicoPaginador = {
+              cantidadTotal: res.body.cantidadTotal,
+              cantidadMostrar: res.body.cantidadMostrar,
+              cantidadPaginas: res.body.cantidadPaginas,
+              paginaActual: res.body.paginaActual,
+              lista: res.body.lista
+            };
+
+            resolve(medicoPaginado);
+
+          } else
+            resolve(null);
+
         }, (err: HttpErrorResponse) => {
-          console.log(err);
+          resolve(null);
         });
     });
   }

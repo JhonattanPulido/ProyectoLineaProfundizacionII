@@ -20,7 +20,7 @@ public class UDireccion implements Serializable {
     private String codigoPostal;
     
     private String direccionDetallada;
-        
+            
     private UMedico medico;
 
     /**
@@ -55,7 +55,7 @@ public class UDireccion implements Serializable {
     public void setDireccionDetallada(String direccionDetallada) {
         this.direccionDetallada = direccionDetallada;
     }
-
+        
     @JsonbTransient
     public UMedico getMedico() {
         return medico;

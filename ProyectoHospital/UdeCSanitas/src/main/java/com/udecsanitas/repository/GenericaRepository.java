@@ -76,6 +76,17 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
         query.setFirstResult(inicio);
         query.setMaxResults(cantidad);
         return query.getResultList();
+    }        
+    
+    /**
+     * Cantidad de registros con un ID     
+     * @param id 
+     * @param queryName 
+     * @return 
+     */
+    @Override
+    public long cantidadId(String queryName, short id) {
+        return (long) em.createNamedQuery(queryName, long.class).setParameter("id", id).getSingleResult();
     }
 
     /**
@@ -86,6 +97,6 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
     @Override
     public long cantidadTotal(String queryName) {
         return (long) em.createNamedQuery(queryName, long.class).getSingleResult();
-    }
+    }    
     
 }

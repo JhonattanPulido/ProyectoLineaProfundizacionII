@@ -23,8 +23,9 @@ public class ExceptionFilter implements ExceptionMapper<Exception>{
      */
     @Override
     public Response toResponse(Exception exception) {
-         ErrorDto error = new ErrorDto("Ha ocurrido un error inesperado", exception.getStackTrace()[0].toString());
-         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+        ErrorDto error = new ErrorDto(exception.getMessage(), exception.getStackTrace()[0].toString());
+        //ErrorDto error = new ErrorDto("Ha ocurrido un error inesperado", exception.getStackTrace()[0].toString());
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                         .entity(error)
                         .build();
     }

@@ -30,7 +30,8 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "QMedicosT", query = "SELECT COUNT(m) FROM Medico m"), // Cantidad total de médicos
     @NamedQuery(name = "QMedicosEmail", query = "SELECT COUNT(m) FROM Medico m WHERE m.correoElectronico = :correo_electronico"), // Cantidad de médicos con correo electónico
     @NamedQuery(name = "LeerMedico", query = "SELECT m FROM Medico m WHERE m.id = :id"), // Leer médico por ID
-    @NamedQuery(name = "LeerMedicos", query = "SELECT m FROM Medico m ORDER BY m.id ASC") // Leer todos los médicos
+    @NamedQuery(name = "LeerMedicos", query = "SELECT m FROM Medico m ORDER BY m.id ASC"), // Leer todos los médicos
+    @NamedQuery(name = "EliminarMedico", query = "DELETE FROM Medico m WHERE m.id = :id") // Eliminar médico
 })
 public class Medico implements Serializable {
     
@@ -54,7 +55,7 @@ public class Medico implements Serializable {
     @NotNull(message = "El correo electrónico es requerido")
     private String correoElectronico;
     
-    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)    
+    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)        
     private Direccion direccion;
 
     /**

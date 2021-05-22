@@ -1,1 +1,41 @@
+<p>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span>UdeC Sanitas</span>
+            <span class="example-spacer"></span>
+
+            <!-- Médicos -->
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>people</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button [routerLink]="'/medicos/pag/0/5'" mat-menu-item>
+                    <mat-icon>toc</mat-icon>
+                    <span>Ver médicos</span>
+                </button>                
+                <button [routerLink]="'/medicos'" mat-menu-item>
+                    <mat-icon>add</mat-icon>
+                    <span>Crear médico</span>
+                </button>
+            </mat-menu>
+            
+            <!-- Exámenes -->
+            <button mat-icon-button [matMenuTriggerFor]="examenes" aria-label="Example icon-button with a menu">
+                <mat-icon>category</mat-icon>
+            </button>
+            <mat-menu #examenes="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>toc</mat-icon>
+                    <span>Ver exámenes</span>
+                </button>                
+                <button mat-menu-item>
+                    <mat-icon>add</mat-icon>
+                    <span>Crear examen</span>
+                </button>
+            </mat-menu>
+
+        </mat-toolbar-row>
+    </mat-toolbar>
+</p>
+
 <router-outlet></router-outlet>

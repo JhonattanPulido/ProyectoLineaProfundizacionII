@@ -17,6 +17,12 @@ public interface IMedicoRepository extends IGenericaRepository<Medico> {
     // Métodos
     
     /**
+     * Eliminar un médico
+     * @param medico 
+     */
+    public void eliminar(Medico medico);
+    
+    /**
      * Cantidad de médicos con un correo electrónico
      * @param correoElectronico
      * @return cantidad de registros con ID

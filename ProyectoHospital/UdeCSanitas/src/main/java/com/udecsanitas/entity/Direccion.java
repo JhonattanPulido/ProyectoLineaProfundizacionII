@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.Size;
@@ -23,6 +25,9 @@ import javax.json.bind.annotation.JsonbTransient;
  */
 @Entity
 @Table(name = "direcciones", schema = "public")
+@NamedQueries({
+    @NamedQuery(name = "EliminarDireccion", query = "DELETE FROM Direccion dir WHERE dir.medico.id = :medico_id")
+})
 public class Direccion implements Serializable {
     
     // Variables
@@ -42,7 +47,7 @@ public class Direccion implements Serializable {
     private String direccionDetallada;
     
     @OneToOne
-    @JoinColumn(name = "medico_id")    
+    @JoinColumn(name = "medico_id")       
     private Medico medico;
 
     /**
@@ -77,7 +82,7 @@ public class Direccion implements Serializable {
     public void setDireccionDetallada(String direccionDetallada) {
         this.direccionDetallada = direccionDetallada;
     }
-    
+        
     @JsonbTransient
     public Medico getMedico() {
         return medico;

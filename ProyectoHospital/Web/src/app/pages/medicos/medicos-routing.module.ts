@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: '',
     component: MedicosComponent
+  },
+  {
+    path: 'pag/:inicio/:cantidad',
+    loadChildren: () => import('./paginar/paginar.module').then(m => m.PaginarModule)
   }
 ];
 

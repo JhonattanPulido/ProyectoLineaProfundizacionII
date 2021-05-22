@@ -18,6 +18,16 @@ public class MedicoRepository extends GenericaRepository<Medico> implements IMed
     // Métodos
     
     /**
+     * Eliminar médico
+     * @param medico 
+     */
+    @Override
+    public void eliminar(Medico medico) {
+        em.createNamedQuery("EliminarDireccion").setParameter("medico_id", medico.getId()).executeUpdate();
+        em.createNamedQuery("EliminarMedico").setParameter("id", medico.getId()).executeUpdate();
+    }
+    
+    /**
      * Cantidad de médicos con un correo electrónico
      * @param correoElectronico
      * @return cantidad de registros con ID
@@ -25,6 +35,6 @@ public class MedicoRepository extends GenericaRepository<Medico> implements IMed
     @Override
     public long cantidadEmail(String correoElectronico) {
         return (long) em.createNamedQuery("QMedicosEmail", long.class).setParameter("correo_electronico", correoElectronico).getSingleResult();
-    }
+    }    
     
 }

@@ -53,6 +53,7 @@ public interface IGenericaService<T, U> {
     /**
      * Eliminar registro
      * @param id
+     * @throws NotFoundException
      */
     public void eliminar(short id) throws    NotFoundException;
     
