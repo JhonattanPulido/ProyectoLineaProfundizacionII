@@ -24,11 +24,11 @@
                 <mat-icon>category</mat-icon>
             </button>
             <mat-menu #examenes="matMenu">
-                <button mat-menu-item>
+                <button [routerLink]="'/examenes/pag/0/5'" mat-menu-item>
                     <mat-icon>toc</mat-icon>
                     <span>Ver exámenes</span>
                 </button>                
-                <button mat-menu-item>
+                <button [routerLink]="'/examenes'" mat-menu-item>
                     <mat-icon>add</mat-icon>
                     <span>Crear examen</span>
                 </button>

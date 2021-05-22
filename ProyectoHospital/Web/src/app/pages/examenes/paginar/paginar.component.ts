@@ -4,11 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 // Entidades
-import { Medico } from 'src/app/entidades/medico.entity';
-import { MedicoPaginador } from 'src/app/entidades/medico-paginador';
+import { Examen } from 'src/app/entidades/examen.entity';
+import { ExamenPaginador } from 'src/app/entidades/examen-paginador';
 
 // Servicios
-import { MedicoService } from 'src/app/services/medico.service';
+import { ExamenService } from 'src/app/services/examen.service';
 
 @Component({
   selector: 'app-paginar',
@@ -20,9 +20,9 @@ export class PaginarComponent implements OnInit {
   // Variables
   public inicio?: number;
   public cantidad?: number;
-  public medicoPaginador?: MedicoPaginador;
-  public dataSource?: Medico[];
-  public displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correoElectronico', 'acciones'];
+  public examenPaginador?: ExamenPaginador;
+  public dataSource?: Examen[];
+  public displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'acciones'];
   private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   private verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -30,11 +30,11 @@ export class PaginarComponent implements OnInit {
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private medicoService: MedicoService,
+    private examenService: ExamenService,
     private activatedRoute: ActivatedRoute
   ) { }
 
-  async ngOnInit(): Promise<void> {        
+  ngOnInit(): void {
 
     this.obtenerParametros('inicio', 'cantidad')
       .then((res: number[] | null) => {
@@ -42,28 +42,28 @@ export class PaginarComponent implements OnInit {
         this.inicio = res![0];
         this.cantidad = res![1];
 
-        this.medicoService.paginar(this.inicio!, this.cantidad!)
-        .then((res: MedicoPaginador | null) => {
+        this.examenService.paginar(this.inicio!, this.cantidad!)
+        .then((res: ExamenPaginador | null) => {
           if (res != null) {
-            this.medicoPaginador = res;
-            this.dataSource = this.medicoPaginador.lista;
+            this.examenPaginador = res;
+            this.dataSource = this.examenPaginador.lista;
           }
         });  
       });
-        
+
   }
 
-  // Método
+  // Métodos
 
-  // Actualizar médico
-  public actualizarMedico(id: number) : void {
-    localStorage.setItem('usuario-id', id.toString());
-    this.router.navigateByUrl('/medicos/actualizar');
+  // Actualizar examen
+  public actualizarExamen(id: number) : void {
+    localStorage.setItem('examen-id', id.toString());
+    this.router.navigateByUrl('/examenes/actualizar');
   }
 
-  // Eliminar médico
-  public eliminarMedico(id: number) : void {
-    this.medicoService.eliminar(id)
+  // Eliminar examen
+  public eliminarExamen(id: number) : void {
+    this.examenService.eliminar(id)
       .then(res => {
         if (res == '0')
           window.location.reload();

@@ -17,3 +17,7 @@ form {
     grid-template-columns: 1fr 1fr;
     gap: 1rem 1.5rem;
 }
+
+.form-one-c {
+    grid-template-columns: 1fr;
+}
