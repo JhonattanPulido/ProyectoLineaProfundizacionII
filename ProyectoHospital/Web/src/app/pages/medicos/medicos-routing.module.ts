@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'pag/:inicio/:cantidad',
     loadChildren: () => import('./paginar/paginar.module').then(m => m.PaginarModule)
+  },
+  {
+    path: 'actualizar',
+    loadChildren: () => import('./actualizar/actualizar.module').then(m => m.ActualizarModule)
   }
 ];
 

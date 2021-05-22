@@ -44,9 +44,28 @@ export class MedicoService {
   }
 
   // Leer médico
-  public leer(id: number) : Promise<Medico | null> {
+  public async leer(id: number) : Promise<Medico | null> {
     return new Promise(resolve => {
-      
+      this.http.get(`${ webAPI }/medicos/${ id }/s`, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          
+          var medico: Medico = {
+            id: res.body.id,
+            nombre: res.body.nombre,
+            apellido: res.body.apellido,
+            correoElectronico: res.body.correoElectronico,
+            direccion: {
+              id: res.body.direccion.id,
+              codigoPostal: res.body.direccion.codigoPostal,
+              direccionDetallada: res.body.direccion.direccionDetallada              
+            }
+          };
+
+          resolve(medico);
+
+        }, (err: HttpErrorResponse) => {
+          resolve(null);
+        });
     });
   }
 
@@ -80,7 +99,7 @@ export class MedicoService {
   // Actualizar médico
   public actualizar(medico: Medico) : Promise<string> {
     return new Promise(resolve => {
-      this.http.put(`${ webAPI }/medicos`, { medico }, { observe: 'response' })
+      this.http.put(`${ webAPI }/medicos`, medico, { observe: 'response' })
         .subscribe((res: HttpResponse<any>) => {
           resolve("0");
         }, ((err: HttpErrorResponse) => {

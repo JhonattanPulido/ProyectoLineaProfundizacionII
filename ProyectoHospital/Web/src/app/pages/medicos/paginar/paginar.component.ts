@@ -1,6 +1,6 @@
 // Librerías
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 // Entidades
@@ -28,6 +28,7 @@ export class PaginarComponent implements OnInit {
 
   // Constructor
   constructor(
+    private router: Router,
     private snackBar: MatSnackBar,
     private medicoService: MedicoService,
     private activatedRoute: ActivatedRoute
@@ -53,6 +54,12 @@ export class PaginarComponent implements OnInit {
   }
 
   // Método
+
+  // Actualizar médico
+  public actualizarMedico(id: number) : void {
+    localStorage.setItem('usuario-id', id.toString());
+    this.router.navigateByUrl('/medicos/actualizar');
+  }
 
   // Eliminar médico
   public eliminarMedico(id: number) : void {
