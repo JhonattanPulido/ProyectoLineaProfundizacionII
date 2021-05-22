@@ -1,3 +1,4 @@
+com\udecsanitas\udecsanitasweb\controller\ExamenController.class
 org\netbeans\rest\application\config\ApplicationConfig.class
 com\udecsanitas\udecsanitasweb\pojo\CorsPolicy.class
 com\udecsanitas\udecsanitasweb\controller\exception\filter\IntegridadExceptionFilter.class

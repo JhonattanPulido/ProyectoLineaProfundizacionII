@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.udecsanitas.udecsanitasweb.controller.ExamenController.class);
         resources.add(com.udecsanitas.udecsanitasweb.controller.MedicoController.class);
         resources.add(com.udecsanitas.udecsanitasweb.controller.exception.filter.ExceptionFilter.class);
         resources.add(com.udecsanitas.udecsanitasweb.controller.exception.filter.IntegridadExceptionFilter.class);

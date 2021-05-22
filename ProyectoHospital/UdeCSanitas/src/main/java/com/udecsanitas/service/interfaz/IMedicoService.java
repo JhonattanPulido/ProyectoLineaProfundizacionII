@@ -4,10 +4,9 @@ package com.udecsanitas.service.interfaz;
 // Librerías
 import javax.ejb.Local;
 import com.udecsanitas.entity.Medico;
-import com.udecsanitas.exception.IntegridadException;
 import com.udecsanitas.utilitarie.UMedico;
 import com.udecsanitas.exception.NotFoundException;
-import com.udecsanitas.utilitarie.UMedicoPaginador;
+import com.udecsanitas.exception.IntegridadException;
 
 /**
  * Interfaz de la capa de datos de médico
