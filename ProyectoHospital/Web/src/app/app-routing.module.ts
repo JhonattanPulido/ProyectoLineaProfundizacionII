@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/examenes/examenes.module').then(m => m.ExamenesModule)
   },
   {
+    path: 'consultas',
+    loadChildren: () => import('./pages/consultas/consultas.module').then(m => m.ConsultasModule)
+  },
+  {
     path: '',
     redirectTo: 'medicos',
     pathMatch: 'full' 

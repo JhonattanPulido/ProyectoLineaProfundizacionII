@@ -7,6 +7,8 @@ import com.udecsanitas.entity.Examen;
 import com.udecsanitas.utilitarie.UExamen;
 import com.udecsanitas.exception.NotFoundException;
 import com.udecsanitas.exception.IntegridadException;
+import com.udecsanitas.exception.NoContentException;
+import java.util.List;
 
 /**
  * Interfaz de la capa de servicios de examen
@@ -18,7 +20,7 @@ import com.udecsanitas.exception.IntegridadException;
 public interface IExamenService extends IGenericaService<Examen, UExamen> {        
     
     // Métodos
-    
+        
     /**
      * Leer examen filtrado por id
      * @param id
@@ -26,6 +28,13 @@ public interface IExamenService extends IGenericaService<Examen, UExamen> {
      * @throws NotFoundException
      */
     public UExamen leer(short id) throws    NotFoundException;
+    
+    /**
+     * Leer todos los exámenes
+     * @return Lista de exámenes
+     * @throws NoContentException 
+     */
+    public List<UExamen> leer() throws NoContentException;
     
     /**
      * Actualizar examen

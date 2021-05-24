@@ -64,6 +64,31 @@ public class ExamenService implements IExamenService {
     }
     
     /**
+     * Leer todos los exámenes
+     * @return Lista de exámenes
+     * @throws NoContentException 
+     */
+    @Override
+    public List<UExamen> leer() throws  NoContentException {
+        
+        List<Examen> listaExamenes = examenRepository.leer();
+        
+        if (listaExamenes.size() > 0) {
+        
+            ModelMapper modelMapper = new ModelMapper();
+            List<UExamen> examenes = new ArrayList<>();
+            
+            for (Examen examen: listaExamenes)
+                examenes.add(modelMapper.map(examen, UExamen.class)); 
+            
+            return examenes;
+            
+        } else
+            throw new NoContentException("");
+        
+    }
+    
+    /**
      * Paginar exámenes
      * @param inicio - Registro de inicio
      * @param cantidad - Cantidad de registros
@@ -136,6 +161,6 @@ public class ExamenService implements IExamenService {
             examenRepository.eliminar(examenRepository.leer("LeerExamen", id));
         else
             throw new NotFoundException("No se encontró el examen");
-    }        
+    }            
             
 }

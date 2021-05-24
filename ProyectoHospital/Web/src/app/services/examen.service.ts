@@ -57,7 +57,19 @@ export class ExamenService {
     });
   }
 
-  // Paginar examenes
+  // Leer exámenes
+  public async leerTodo() : Promise<Examen[] | null> {
+    return new Promise(resolve => {
+      this.http.get(`${ webAPI }/examenes`, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          resolve(res.body);
+        }, (err: HttpErrorResponse) => {
+          resolve(null);
+        });
+    });
+  }
+
+  // Paginar exámenes
   public async paginar(inicio: number, cantidad: number) : Promise<ExamenPaginador | null> {
     return new Promise(resolve => {
       this.http.get(`${ webAPI }/examenes/${ inicio }/${ cantidad }`, { observe: 'response' })

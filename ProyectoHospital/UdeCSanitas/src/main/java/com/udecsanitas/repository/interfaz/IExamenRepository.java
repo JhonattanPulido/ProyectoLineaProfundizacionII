@@ -4,6 +4,7 @@ package com.udecsanitas.repository.interfaz;
 // Librerías
 import javax.ejb.Local;
 import com.udecsanitas.entity.Examen;
+import java.util.List;
 
 /**
  * Interfaz de la capa de datos de examen
@@ -15,6 +16,12 @@ import com.udecsanitas.entity.Examen;
 public interface IExamenRepository extends IGenericaRepository<Examen> {
     
     // Métodos
+    
+    /**
+     * Leer todos los exámenes
+     * @return lista de exámenes
+     */
+    public List<Examen> leer();
     
     /**
      * Eliminar examen

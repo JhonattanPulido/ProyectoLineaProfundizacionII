@@ -1,0 +1,133 @@
+<div class="contenedor" style="padding-bottom: 50px;">
+
+    <br>
+    <br>
+    <h1 style="width: 100%; font-weight: 500; text-align: center;">Registro de consulta</h1>
+
+    <div class="form form-one-c">
+
+        <div class="form-cntr">               
+    
+            <br>   
+            <br>
+            <h1 style="width: 100%; font-weight: 500;">Detalles de consulta</h1> 
+
+            <table class="mat-elevation-z8 my-table" style="width: 100%;">  
+                
+                <tr>
+                    <th> Diagnóstico</th>
+                    <td *ngFor="let element of listaDetallesConsultas"> {{element.diagnostico}} </td>                    
+                </tr>
+
+                <tr>
+                    <th> Tratamiento</th>
+                    <td *ngIf="listaDetallesConsultas.length == 0">No hay detalles</td>
+                    <td *ngFor="let element of listaDetallesConsultas"> {{element.tratamiento}} </td>
+                </tr>
+
+                <tr>
+                    <th> Acciones</th>
+                    <td *ngFor="let element of listaDetallesConsultas" style="padding: 0;">                                      
+                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon" (click)="removeDetalleConsulta(element)"> 
+                            <mat-icon>delete</mat-icon>
+                        </button>                
+                    </td>
+                </tr>
+
+                <!--<ng-container matColumnDef="diagnostico">
+                    <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
+                    <td mat-cell *matCellDef="let element"> {{element.diagnostico}} </td>
+                </ng-container>   
+                                
+                <ng-container matColumnDef="tratamiento">
+                    <th mat-header-cell *matHeaderCellDef> Tratamiento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tratamiento}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element">                                      
+                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">  (click)="eliminarExamen(element.id)" 
+                            <mat-icon>delete</mat-icon>
+                        </button>                
+                    </td>
+                </ng-container> 
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+
+            </table>
+
+        </div>
+
+        <div class="form-cntr">            
+            
+            <form class="form form-one-c" *ngIf="formGroup != null" [formGroup]="formGroup" (ngSubmit)="addDetalleConsulta()">
+
+                <div class="form-cntr">
+
+                    <br>
+                    <br>
+                    <mat-card-title>Añadir detalle de consulta</mat-card-title>
+                    <br>
+                    <br>
+
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Diagnóstico</mat-label>
+                            <input matInput placeholder="Ingrese el diagnóstico" formControlName="diagnostico">
+                            <mat-icon matSuffix>edit</mat-icon>
+                            <mat-hint>Mínimo 2 y máximo 120 letras</mat-hint>
+                        </mat-form-field>                    
+                    </p>
+
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Tratamiento</mat-label>
+                            <input matInput placeholder="Ingrese el tratamiento" formControlName="tratamiento">
+                            <mat-icon matSuffix>edit</mat-icon>
+                            <mat-hint>Mínimo 2 y máximo 120 letras</mat-hint>
+                        </mat-form-field>
+                    </p>
+
+                    <p>
+                        <button type="submit" color="accent" style="float: right;" mat-mini-fab aria-label="Example icon-button with a heart icon">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </p>
+
+                </div>
+
+            </form>                       
+
+        </div>
+
+        <div class="form-cntr">
+
+            <br>
+            <br>
+            <mat-card-title>Examenes</mat-card-title>
+            <br>
+            <br>
+
+            <p>
+                <mat-form-field appearance="fill" *ngIf="listaExamenes != null">
+                    <mat-label>Examenes</mat-label>
+                    <mat-select [formControl]="toppings" multiple>
+                        <mat-option *ngFor="let examen of listaExamenes" [value]="examen.id"
+                            matTooltip="{{ examen.descripcion }}" matTooltipClass="example-tooltip-red">{{ examen.nombre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <button type="button" color="primary" style="float: right;" (click)="crearConsulta()" mat-fab aria-label="Example icon-button with a heart icon">
+                    <mat-icon>done</mat-icon>
+                </button>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>

@@ -21,3 +21,15 @@ form {
 .form-one-c {
     grid-template-columns: 1fr;
 }
+
+.my-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.my-table tr > *{
+    display: block;
+    padding: .6rem 0;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}

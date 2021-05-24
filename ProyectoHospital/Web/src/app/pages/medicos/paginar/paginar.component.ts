@@ -22,7 +22,7 @@ export class PaginarComponent implements OnInit {
   public cantidad?: number;
   public medicoPaginador?: MedicoPaginador;
   public dataSource?: Medico[];
-  public displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correoElectronico', 'acciones'];
+  public displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correoElectronico', 'consultas', 'acciones'];
   private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   private verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -54,6 +54,12 @@ export class PaginarComponent implements OnInit {
   }
 
   // Método
+
+  // Leer consultas
+  public crearConsulta(id: number) : void {
+    localStorage.setItem('medico-id', id.toString());
+    this.router.navigateByUrl('/consultas');
+  }
 
   // Actualizar médico
   public actualizarMedico(id: number) : void {

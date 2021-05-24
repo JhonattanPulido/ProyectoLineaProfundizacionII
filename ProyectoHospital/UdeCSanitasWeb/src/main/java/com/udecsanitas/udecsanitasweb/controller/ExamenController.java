@@ -68,6 +68,19 @@ public class ExamenController {
     }
     
     /**
+     * Leer todos los exámenes
+     * @return Lista de exámenes
+     * @throws NoContentException 
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response leer() throws   NoContentException {
+        return Response.status(Response.Status.OK)
+                        .entity(examenService.leer())
+                        .build();
+    }
+    
+    /**
      * Paginar exámenes
      * @param inicio - Registro de inicio
      * @param cantidad - Cantidad a obtener

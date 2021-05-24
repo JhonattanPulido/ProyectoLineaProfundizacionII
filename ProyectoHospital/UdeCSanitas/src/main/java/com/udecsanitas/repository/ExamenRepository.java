@@ -5,6 +5,7 @@ package com.udecsanitas.repository;
 import javax.ejb.Stateless;
 import com.udecsanitas.entity.Examen;
 import com.udecsanitas.repository.interfaz.IExamenRepository;
+import java.util.List;
 
 /**
  * Capa de datos de examen
@@ -16,6 +17,15 @@ import com.udecsanitas.repository.interfaz.IExamenRepository;
 public class ExamenRepository extends GenericaRepository<Examen> implements IExamenRepository {
 
     // Métodos
+    
+    /**
+     * Leer todos los exámenes
+     * @return Lista de exámenes
+     */
+    @Override
+    public List<Examen> leer() {
+        return em.createNamedQuery("LeerExamenes", Examen.class).getResultList();
+    }
     
     /**
      * Eliminar examen
@@ -48,6 +58,6 @@ public class ExamenRepository extends GenericaRepository<Examen> implements IExa
                 .setParameter("nombre", nombre)
                 .setParameter("id", id)
                 .getSingleResult();
-    }    
+    }        
     
 }
