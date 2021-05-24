@@ -84,7 +84,7 @@ export class ConsultasComponent implements OnInit {
         await this.consultaService.crear(consultas, Number.parseInt(localStorage.getItem('medico-id')!))
           .then((res: string) => {
             if (res == "0")
-              this.router.navigateByUrl('/'); // Cambiar esta vaina
+              this.router.navigateByUrl('/consultas/pag/0/5');
             else
               this.snackBar.open(res, 'Cerrar', {
                 horizontalPosition: this.horizontalPosition,

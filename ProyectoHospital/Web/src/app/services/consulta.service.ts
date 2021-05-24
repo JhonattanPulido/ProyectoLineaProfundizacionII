@@ -41,7 +41,7 @@ export class ConsultaService {
   // Paginar consultas
   public async paginar(inicio: number, cantidad: number, medicoId: number) : Promise<ConsultaPaginador | null> {
     return new Promise(resolve => {
-      this.http.get(`${ webAPI }/consultas/${ inicio }/${ cantidad }/${ medicoId }`, { observe: 'response' })
+      this.http.get(`${ webAPI }/consultas/pag/${ inicio }/${ cantidad }/${ medicoId }`, { observe: 'response' })
         .subscribe((res: HttpResponse<any>) => {
 
           var consultaPaginador: ConsultaPaginador = {

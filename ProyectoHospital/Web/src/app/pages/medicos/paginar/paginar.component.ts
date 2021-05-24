@@ -55,10 +55,17 @@ export class PaginarComponent implements OnInit {
 
   // Método
 
-  // Leer consultas
+  // Crear consulta
   public crearConsulta(id: number) : void {
-    localStorage.setItem('medico-id', id.toString());
+    localStorage.setItem('medico-id', id.toString());    
     this.router.navigateByUrl('/consultas');
+  }
+
+  // Leer consultas
+  public leerConsultas(id: number, nombre: string) : void {
+    localStorage.setItem('medico-id', id.toString()); 
+    localStorage.setItem('medico-nombre', nombre); 
+    this.router.navigateByUrl('/consultas/pag/0/5');
   }
 
   // Actualizar médico

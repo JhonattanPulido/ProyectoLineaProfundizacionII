@@ -1,0 +1,78 @@
+<div class="contenedor">
+
+    <br>
+    <br>
+    <h1 *ngIf="nombreMedico != null" style="width: 100%; font-weight: 500; text-align: center;">Lista de consultas de {{
+        nombreMedico }}</h1>
+
+    <table *ngIf="dataSource != null" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
+        style="width: 100%;">
+
+        <!-- Id -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Fecha -->
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{ element.fecha }} </td>
+        </ng-container>
+
+        <!-- Cantidad de detalles consulta -->
+        <ng-container matColumnDef="detallesConsultas">
+            <th mat-header-cell *matHeaderCellDef> Consultas </th>
+            <td mat-cell *matCellDef="let element"> {{ element.listaDetallesConsultas.length }} </td>
+        </ng-container>
+
+        <!-- Cantidad de exámenes -->
+        <ng-container matColumnDef="examenes">
+            <th mat-header-cell *matHeaderCellDef> Exámenes </th>
+            <td mat-cell *matCellDef="let element"> {{ element.listaExamenes.length }} </td>
+        </ng-container>
+
+        <!-- Cantidad de exámenes -->
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"> 
+                    <div class="h-h">
+                        <div class="example-element-symbol" style="padding-bottom: 8px;"> Detalles </div>                                        
+                        <div *ngFor="let consulta of element.listaDetallesConsultas" class="example-element-description">
+                            <b>{{ consulta.diagnostico }}:</b>
+                            {{ consulta.tratamiento }}                        
+                        </div>
+                    </div>    
+                    <div class="h-h">
+                        <div class="example-element-symbol" style="padding-bottom: 8px;"> Exámenes </div>                    
+                        <div *ngFor="let examen of element.listaExamenes" class="example-element-description">
+                            <b>{{ examen.nombre }}:</b>
+                            {{ examen.descripcion }}                        
+                        </div>
+                    </div>                                                       
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+</div>

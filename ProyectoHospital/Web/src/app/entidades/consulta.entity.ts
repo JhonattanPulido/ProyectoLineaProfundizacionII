@@ -6,7 +6,7 @@ import { DetalleConsulta } from "./detalle-consulta.entity";
 // Entidad consulta
 export interface Consulta {
     id?: number,
-    fecha?: Date,
+    fecha?: Date,    
     medico?: Medico,
     listaDetallesConsultas?: DetalleConsulta[],
     listaExamenes?: any[]
