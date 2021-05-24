@@ -29,4 +29,16 @@ public interface IConsultaService {
     public void crear(List<Consulta> listaConsultas, short medicoId) throws NoContentException,
                                                                             NotFoundException;
     
+    /**
+     * Leer consultas paginadas
+     * @param inicio
+     * @param cantidad
+     * @param medicoId
+     * @return Lista de registros
+     * @throws NotFoundException
+     * @throws NoContentException 
+     */
+    public String leer(short inicio, short cantidad, short medicoId) throws NotFoundException,
+                                                                            NoContentException;
+    
 }

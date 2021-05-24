@@ -16,6 +16,7 @@ import com.udecsanitas.entity.Consulta;
 import com.udecsanitas.exception.NotFoundException;
 import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.service.interfaz.IConsultaService;
+import javax.ws.rs.GET;
 
 /**
  * Controlador de consulta
@@ -50,6 +51,28 @@ public class ConsultaController {
                                                                                                         NotFoundException {
         consultaService.crear(listaConsultas, medicoId);
         return Response.status(Response.Status.CREATED)
+                        .build();
+    }
+    
+    /**
+     * Leer consultas filtradas por médico
+     * @param inicio
+     * @param cantidad
+     * @param medicoId
+     * @return Lista de consultas
+     * @throws NotFoundException
+     * @throws NoContentException 
+     */
+    @GET
+    @Path("/pag/{inicio}/{cantidad}/{medicoId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response leer(
+            @PathParam("inicio") Short inicio,
+            @PathParam("cantidad") Short cantidad,
+            @PathParam("medicoId") Short medicoId) throws   NotFoundException,
+                                                            NoContentException {
+        return Response.status(Response.Status.OK)
+                        .entity(consultaService.leer(inicio, cantidad, medicoId))
                         .build();
     }
     

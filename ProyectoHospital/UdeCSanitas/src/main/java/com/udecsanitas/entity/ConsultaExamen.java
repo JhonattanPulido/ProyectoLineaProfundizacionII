@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.MapsId;
 import javax.persistence.ManyToOne;
 import javax.persistence.EmbeddedId;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * Entidad consulta examen
@@ -17,6 +19,9 @@ import javax.persistence.EmbeddedId;
  */
 @Entity
 @Table(name = "consultas_examenes", schema = "public")
+@NamedQueries({
+    @NamedQuery(name = "QConsultaExamen", query = "SELECT COUNT(ce) FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id AND ce.examen.id = :examen_id"), // Leer consultas examenes filtradas por id de consulta    
+})
 public class ConsultaExamen implements Serializable {
     
     // Variables        
@@ -38,6 +43,16 @@ public class ConsultaExamen implements Serializable {
     public ConsultaExamen() {
         
     }
+
+    /**
+     * Constructor con parámetros
+     * @param consulta
+     * @param examen 
+     */
+    public ConsultaExamen(Consulta consulta, Examen examen) {
+        this.consulta = consulta;
+        this.examen = examen;
+    }        
     
     // Métodos get & set
 

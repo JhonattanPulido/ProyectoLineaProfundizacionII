@@ -43,8 +43,10 @@ public class GenericaRepository<T> implements IGenericaRepository<T> {
      * @param t 
      */
     @Override
-    public void crear(T t) {
+    public T crear(T t) {
         em.persist(t);
+        em.flush();
+        return t;
     }
 
     /**

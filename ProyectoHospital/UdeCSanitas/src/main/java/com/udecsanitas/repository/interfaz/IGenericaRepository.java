@@ -21,8 +21,9 @@ public interface IGenericaRepository<T> {
     /**
      * Crear registro
      * @param t 
+     * @return registro
      */
-    public void crear(T t);
+    public T crear(T t);
     
     /**
      * Leer registro

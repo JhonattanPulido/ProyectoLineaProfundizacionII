@@ -2,6 +2,7 @@
 package com.udecsanitas.utilitarie;
 
 // Librerías
+import com.udecsanitas.entity.Examen;
 import java.util.Date;
 import java.util.List;
 import java.io.Serializable;
@@ -22,9 +23,9 @@ public class UConsulta implements Serializable {
     
     private UMedico medico;
     
-    private List<UDetalleConsulta> listaDetallesConsultas;
+    private List<UDetalleConsulta> listaDetallesConsultas;       
     
-    private List<Short> listaExamenes;
+    private List<Examen> listaExamenes;
 
     /**
      * Constructor
@@ -67,12 +68,12 @@ public class UConsulta implements Serializable {
         this.listaDetallesConsultas = listaDetallesConsultas;
     }
 
-    public List<Short> getListaExamenes() {
+    public List<Examen> getListaExamenes() {
         return listaExamenes;
     }
 
-    public void setListaExamenes(List<Short> listaExamenes) {
+    public void setListaExamenes(List<Examen> listaExamenes) {
         this.listaExamenes = listaExamenes;
-    }
+    }   
         
 }

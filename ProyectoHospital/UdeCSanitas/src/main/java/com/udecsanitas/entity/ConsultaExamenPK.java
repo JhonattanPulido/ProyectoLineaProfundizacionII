@@ -3,6 +3,7 @@ package com.udecsanitas.entity;
 
 // Librerías
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -28,7 +29,17 @@ public class ConsultaExamenPK implements Serializable {
      */
     public ConsultaExamenPK() {
         
-    }
+    }   
+
+    /**
+     * Constructor con parámetros
+     * @param consultaId
+     * @param examenId 
+     */
+    public ConsultaExamenPK(Short consultaId, Short examenId) {
+        this.consultaId = consultaId;
+        this.examenId = examenId;
+    }        
 
     // Métodos set & get
     
@@ -46,6 +57,35 @@ public class ConsultaExamenPK implements Serializable {
 
     public void setExamenId(Short examenId) {
         this.examenId = examenId;
-    }        
+    }     
+    
+    // Equals & hash code
+    
+     @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ConsultaExamenPK other = (ConsultaExamenPK) obj;
+        if (!Objects.equals(this.consultaId, other.consultaId)) {
+            return false;
+        }
+        if (!Objects.equals(this.examenId, other.examenId)) {
+            return false;
+        }
+        return true;
+    }
     
 }

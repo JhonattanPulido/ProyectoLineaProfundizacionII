@@ -39,13 +39,14 @@ public class UPaginador<T> implements Serializable {
      * @param paginaActual
      * @param cantidadTotal  
      * @param cantidadMostrar 
+     * @param lista 
      */
     public UPaginador(short paginaActual, short cantidadTotal, short cantidadMostrar, List<T> lista) {
         this.lista = lista;
         this.paginaActual = paginaActual;
         this.cantidadTotal = cantidadTotal;
         this.cantidadMostrar = cantidadMostrar;
-        cantidadPaginas = (Math.ceil(cantidadTotal / cantidadMostrar) + 1);
+        cantidadPaginas = (Math.ceil(cantidadTotal / cantidadMostrar) + 1); // Modificar esto
     }
 
     // Métodos get & set

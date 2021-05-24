@@ -3,6 +3,7 @@ com\udecsanitas\entity\ConsultaExamen_.class
 com\udecsanitas\service\MedicoService.class
 com\udecsanitas\repository\interfaz\IMedicoRepository.class
 com\udecsanitas\service\ExamenService.class
+com\udecsanitas\repository\interfaz\IConsultaExamenRepository.class
 com\udecsanitas\repository\interfaz\IGenericaRepository.class
 com\udecsanitas\service\ConsultaService.class
 com\udecsanitas\entity\Direccion_.class
@@ -10,7 +11,6 @@ com\udecsanitas\entity\Consulta_.class
 com\udecsanitas\service\interfaz\IGenericaService.class
 com\udecsanitas\utilitarie\UPaginador.class
 com\udecsanitas\repository\interfaz\IExamenRepository.class
-com\udecsanitas\utilitarie\UMedicoPaginador.class
 com\udecsanitas\entity\ConsultaExamenPK_.class
 com\udecsanitas\exception\NotFoundException.class
 com\udecsanitas\service\interfaz\IConsultaService.class
@@ -18,6 +18,7 @@ com\udecsanitas\repository\GenericaRepository.class
 com\udecsanitas\entity\Consulta.class
 com\udecsanitas\entity\DetalleConsulta_.class
 com\udecsanitas\repository\interfaz\IConsultaRepository.class
+com\udecsanitas\repository\ConsultaExamenRepository.class
 com\udecsanitas\entity\Medico_.class
 com\udecsanitas\repository\ExamenRepository.class
 com\udecsanitas\entity\Examen_.class
@@ -34,6 +35,7 @@ com\udecsanitas\exception\IntegridadException.class
 com\udecsanitas\entity\ConsultaExamenPK.class
 com\udecsanitas\utilitarie\UConsulta.class
 com\udecsanitas\entity\ConsultaExamen.class
+com\udecsanitas\service\ConsultaService$1.class
 com\udecsanitas\service\ExamenService$1.class
 com\udecsanitas\repository\ConsultaRepository.class
 com\udecsanitas\service\interfaz\IMedicoService.class

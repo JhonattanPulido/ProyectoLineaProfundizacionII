@@ -5,6 +5,7 @@ package com.udecsanitas.entity;
 import java.util.List;
 import java.util.Date;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
@@ -13,13 +14,15 @@ import javax.persistence.Temporal;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.persistence.NamedQuery;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import javax.persistence.TemporalType;
+import javax.persistence.NamedQueries;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.Transient;
 
 /**
  * Entidad consulta
@@ -29,6 +32,10 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "consultas", schema = "public")
+@NamedQueries({
+    @NamedQuery(name = "QConsultasXMedico", query = "SELECT COUNT(c) FROM Consulta c WHERE c.medico.id = :medico_id"),
+    @NamedQuery(name = "LeerConsultasXMedico", query = "SELECT c FROM Consulta c WHERE c.medico.id = :medico_id ORDER BY c.id ASC")
+})
 public class Consulta implements Serializable {
     
     // Variables
@@ -99,6 +106,32 @@ public class Consulta implements Serializable {
 
     public void setListaExamenes(List<Short> listaExamenes) {
         this.listaExamenes = listaExamenes;
+    }
+
+    // Equals & hash code
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Consulta other = (Consulta) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
         
 }

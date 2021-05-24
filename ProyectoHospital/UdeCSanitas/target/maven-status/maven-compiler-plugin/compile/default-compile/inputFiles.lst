@@ -1,4 +1,5 @@
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\exception\NotFoundException.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\ConsultaExamenRepository.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\ConsultaRepository.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\interfaz\IConsultaRepository.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\ExamenRepository.java
@@ -15,7 +16,6 @@ C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSani
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\service\interfaz\IMedicoService.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\exception\NoContentException.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\utilitarie\UDireccion.java
-C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\utilitarie\UMedicoPaginador.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\entity\ConsultaExamenPK.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\MedicoRepository.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\service\interfaz\IExamenService.java
@@ -30,4 +30,5 @@ C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSani
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\service\ConsultaService.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\interfaz\IExamenRepository.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\interfaz\IGenericaRepository.java
+C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\repository\interfaz\IConsultaExamenRepository.java
 C:\Users\jhona\Documents\ProyectoLineaProfundizacionII\ProyectoHospital\UdeCSanitas\src\main\java\com\udecsanitas\entity\Examen.java
