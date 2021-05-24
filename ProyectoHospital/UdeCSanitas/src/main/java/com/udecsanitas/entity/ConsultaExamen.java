@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.MapsId;
 import javax.persistence.ManyToOne;
 import javax.persistence.EmbeddedId;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
 
 /**
  * Entidad consulta examen
@@ -20,8 +20,9 @@ import javax.persistence.NamedQuery;
 @Entity
 @Table(name = "consultas_examenes", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "QConsultaExamen", query = "SELECT COUNT(ce) FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id AND ce.examen.id = :examen_id"), // Leer consultas examenes filtradas por id de consulta    
-})
+    @NamedQuery(name = "QConsultaExamen", query = "SELECT COUNT(ce) FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id AND ce.examen.id = :examen_id"), // Leer consultas examenes filtradas por id de consulta        
+    @NamedQuery(name = "LeerXConsulta", query = "SELECT ce.examen.id FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id ORDER BY ce.consulta.id ASC")
+})  
 public class ConsultaExamen implements Serializable {
     
     // Variables        

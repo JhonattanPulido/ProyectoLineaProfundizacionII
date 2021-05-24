@@ -5,6 +5,7 @@ package com.udecsanitas.repository;
 import javax.ejb.Stateless;
 import com.udecsanitas.entity.ConsultaExamen;
 import com.udecsanitas.repository.interfaz.IConsultaExamenRepository;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -34,6 +35,17 @@ public class ConsultaExamenRepository implements IConsultaExamenRepository {
         em.flush();
         return consultaExamen;
     }
+    
+    /**
+     * Leer consultas examen filtradas por consulta
+     * @param consultaId
+     * @return Lista de consultas examen
+     */
+    @Override
+    public List<Short> leer(short consultaId) {
+        //return em.createNamedQuery("LeerXConsulta", ConsultaExamen.class).setParameter("consulta_id", consultaId).getResultList();
+        return em.createNamedQuery("LeerXConsulta", short.class).setParameter("consulta_id", consultaId).getResultList();
+    }
 
     /**
      * Cantidad de consultas examen con una consulta y un examen
@@ -47,6 +59,6 @@ public class ConsultaExamenRepository implements IConsultaExamenRepository {
                 .setParameter("consulta_id", consultaId)
                 .setParameter("examen_id", examenId)
                 .getFirstResult();
-    }
+    }    
     
 }

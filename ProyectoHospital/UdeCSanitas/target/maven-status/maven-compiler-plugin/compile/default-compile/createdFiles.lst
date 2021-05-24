@@ -8,6 +8,7 @@ com\udecsanitas\repository\interfaz\IGenericaRepository.class
 com\udecsanitas\service\ConsultaService.class
 com\udecsanitas\entity\Direccion_.class
 com\udecsanitas\entity\Consulta_.class
+com\udecsanitas\utilitarie\UConsultaExamen.class
 com\udecsanitas\service\interfaz\IGenericaService.class
 com\udecsanitas\utilitarie\UPaginador.class
 com\udecsanitas\repository\interfaz\IExamenRepository.class

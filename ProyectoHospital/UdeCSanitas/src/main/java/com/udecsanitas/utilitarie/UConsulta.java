@@ -2,9 +2,9 @@
 package com.udecsanitas.utilitarie;
 
 // Librerías
-import com.udecsanitas.entity.Examen;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 /**
@@ -25,13 +25,14 @@ public class UConsulta implements Serializable {
     
     private List<UDetalleConsulta> listaDetallesConsultas;       
     
-    private List<Examen> listaExamenes;
+    private List<UExamen> listaExamenes;
 
     /**
      * Constructor
      */
     public UConsulta() {
-        
+        listaExamenes = new ArrayList<>();
+        listaDetallesConsultas = new ArrayList<>();
     }        
 
     // Métodos get & set
@@ -66,14 +67,14 @@ public class UConsulta implements Serializable {
 
     public void setListaDetallesConsultas(List<UDetalleConsulta> listaDetallesConsultas) {
         this.listaDetallesConsultas = listaDetallesConsultas;
-    }
+    }   
 
-    public List<Examen> getListaExamenes() {
+    public List<UExamen> getListaExamenes() {
         return listaExamenes;
     }
 
-    public void setListaExamenes(List<Examen> listaExamenes) {
+    public void setListaExamenes(List<UExamen> listaExamenes) {
         this.listaExamenes = listaExamenes;
-    }   
+    }
         
 }

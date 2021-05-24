@@ -2,6 +2,7 @@
 package com.udecsanitas.repository.interfaz;
 
 // Librerías
+import java.util.List;
 import javax.ejb.Local;
 import com.udecsanitas.entity.ConsultaExamen;
 
@@ -22,6 +23,13 @@ public interface IConsultaExamenRepository {
      * @return consulta examen
      */
     public ConsultaExamen crear(ConsultaExamen consultaExamen);
+    
+    /**
+     * Leer consultas examen filtradas por consulta
+     * @param consultaId
+     * @return Lista de consultas examen
+     */
+    public List<Short> leer(short consultaId);
     
     /**
      * Cantidad de consultas examen con una consulta y un examen

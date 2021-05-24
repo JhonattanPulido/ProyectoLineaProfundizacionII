@@ -5,11 +5,17 @@ package com.udecsanitas.service;
 import javax.ejb.EJB;
 import java.util.List;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
+import org.json.JSONObject;
+import org.modelmapper.ModelMapper;
 import com.udecsanitas.entity.Medico;
 import com.udecsanitas.entity.Examen;
 import com.udecsanitas.entity.Consulta;
+import com.udecsanitas.utilitarie.UConsulta;
+import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.entity.ConsultaExamen;
 import com.udecsanitas.entity.DetalleConsulta;
+import com.udecsanitas.utilitarie.UDetalleConsulta;
 import com.udecsanitas.exception.NotFoundException;
 import com.udecsanitas.exception.NoContentException;
 import com.udecsanitas.service.interfaz.IConsultaService;
@@ -17,12 +23,7 @@ import com.udecsanitas.repository.interfaz.IExamenRepository;
 import com.udecsanitas.repository.interfaz.IMedicoRepository;
 import com.udecsanitas.repository.interfaz.IConsultaRepository;
 import com.udecsanitas.repository.interfaz.IConsultaExamenRepository;
-import com.udecsanitas.utilitarie.UConsulta;
-import com.udecsanitas.utilitarie.UDetalleConsulta;
-import com.udecsanitas.utilitarie.UPaginador;
-import java.util.ArrayList;
-import org.json.JSONObject;
-import org.modelmapper.ModelMapper;
+import com.udecsanitas.utilitarie.UExamen;
 
 /**
  * Capa de servicios de consulta
@@ -114,16 +115,32 @@ public class ConsultaService implements IConsultaService {
 
             if (listaConsultas.size() > 0) {
 
+                UExamen examenAux;
                 UConsulta consultaAux;
                 UDetalleConsulta detalleConsultaAux;
                 ModelMapper modelMapper = new ModelMapper();
+                List<UExamen> examenes;
                 List<UConsulta> consultas = new ArrayList<>();
-                List<UDetalleConsulta> detallesConsultas = new ArrayList<>();
+                List<UDetalleConsulta> detallesConsultas; 
+                //List<ConsultaExamen> listaConsultasExamenes = new ArrayList<>();
+                List<Short> listaConsultasExamenes;
 
-                for (Consulta consulta: listaConsultas) {
+                for (Consulta consulta: listaConsultas) {                    
 
-                    detallesConsultas.clear();
-
+                    listaConsultasExamenes = consultaExamenRepository.leer(consulta.getId());
+                    examenes = new ArrayList<>();
+                    detallesConsultas = new ArrayList<>();
+                    
+                    /*for (ConsultaExamen consultaExamen: listaConsultasExamenes) {
+                        examenAux = modelMapper.map(examenRepository.leer("LeerExamen", consultaExamen.getExamen().getId()), UExamen.class);
+                        examenes.add(examenAux);
+                    }*/
+                    
+                    for (Short consultaExamen: listaConsultasExamenes) {
+                        examenAux = modelMapper.map(examenRepository.leer("LeerExamen", consultaExamen), UExamen.class);
+                        examenes.add(examenAux);
+                    }
+                    
                     for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas()) {
                         detalleConsultaAux = modelMapper.map(detalleConsulta, UDetalleConsulta.class);
                         detalleConsultaAux.setConsulta(null);
@@ -131,6 +148,7 @@ public class ConsultaService implements IConsultaService {
                     }
 
                     consultaAux = modelMapper.map(consulta, UConsulta.class);
+                    consultaAux.setListaExamenes(examenes);
                     consultaAux.setListaDetallesConsultas(detallesConsultas);
                     consultaAux.setMedico(null);
                     consultas.add(consultaAux);
