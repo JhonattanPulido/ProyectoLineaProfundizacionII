@@ -45,6 +45,18 @@ public class ExamenRepository extends GenericaRepository<Examen> implements IExa
     public long cantidadNombre(String nombre) {
         return (long) em.createNamedQuery("QExamenesNombre", long.class).setParameter("nombre", nombre).getSingleResult();
     }
+    
+    /**
+     * Cantidad de consultas examenes que tienen asociado un examen
+     * @param id
+     * @return Cantidad de exámenes
+     */
+    @Override
+    public long cantidadConsultasExamenes(short id) {        
+        return (long) em.createNamedQuery("QExamenesConsultaExamen", long.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
     /**
      * Validar nombre de examen para actualizar
@@ -58,6 +70,6 @@ public class ExamenRepository extends GenericaRepository<Examen> implements IExa
                 .setParameter("nombre", nombre)
                 .setParameter("id", id)
                 .getSingleResult();
-    }        
+    }            
     
 }

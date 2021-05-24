@@ -30,6 +30,13 @@ public interface IMedicoRepository extends IGenericaRepository<Medico> {
     public long cantidadEmail(String correoElectronico);
     
     /**
+     * Cantidad de consultas pertenecientes a un médico
+     * @param id
+     * @return Cantidad registros
+     */
+    public long cantidadConsultas(short id);
+    
+    /**
      * Validar correo electrónico para actualizar
      * @param correoElectronico
      * @param id

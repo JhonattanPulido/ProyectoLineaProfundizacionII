@@ -36,6 +36,18 @@ public class MedicoRepository extends GenericaRepository<Medico> implements IMed
     public long cantidadEmail(String correoElectronico) {
         return (long) em.createNamedQuery("QMedicosEmail", long.class).setParameter("correo_electronico", correoElectronico).getSingleResult();
     }    
+    
+    /**
+     * Cantidad de consultas pertenecientes a un médico
+     * @param id
+     * @return Cantidad registros
+     */
+    @Override
+    public long cantidadConsultas(short id) {
+        return (long) em.createNamedQuery("QMedicosConsulta", long.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
     /**
      * Validar correo electrónico para actualizar
@@ -49,6 +61,6 @@ public class MedicoRepository extends GenericaRepository<Medico> implements IMed
                 .setParameter("correo_electronico", correoElectronico)
                 .setParameter("id", id)
                 .getSingleResult();
-    }   
+    }       
     
 }

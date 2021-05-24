@@ -118,11 +118,13 @@ public class ExamenController {
      * @param id - ID del examen
      * @return 200
      * @throws NotFoundException 
+     * @throws IntegridadException
      */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response eliminar(@PathParam("id") Short id) throws  NotFoundException {
+    public Response eliminar(@PathParam("id") Short id) throws  NotFoundException,
+                                                                IntegridadException {
         examenService.eliminar(id);
         return Response.status(Response.Status.OK)
                         .build();

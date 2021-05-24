@@ -21,7 +21,9 @@ import javax.persistence.NamedQueries;
 @Table(name = "consultas_examenes", schema = "public")
 @NamedQueries({
     @NamedQuery(name = "QConsultaExamen", query = "SELECT COUNT(ce) FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id AND ce.examen.id = :examen_id"), // Leer consultas examenes filtradas por id de consulta        
-    @NamedQuery(name = "LeerXConsulta", query = "SELECT ce.examen.id FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id ORDER BY ce.consulta.id ASC")
+    @NamedQuery(name = "LeerXConsulta", query = "SELECT ce.examen.id FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id ORDER BY ce.consulta.id ASC"),
+    @NamedQuery(name = "EliminarConsultaExamen", query = "DELETE FROM ConsultaExamen ce WHERE ce.consulta.id = :consulta_id"),
+    @NamedQuery(name = "EliminarCEExamen", query = "DELETE FROM ConsultaExamen ce WHERE ce.examen.id = :examen_id")
 })  
 public class ConsultaExamen implements Serializable {
     

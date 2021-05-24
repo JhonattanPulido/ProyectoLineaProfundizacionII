@@ -103,10 +103,10 @@ export class ExamenService {
         .subscribe((res: HttpResponse<any>) => {
           resolve("0");
         }, (err: HttpErrorResponse) => {
-          if (err.status == 404 || err.status == 409)
-            resolve(err.error.mensaje);
-          else
+          if (err.status == 500)
             resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
+          else
+            resolve(err.error.mensaje);
         });
     });
   }
@@ -118,10 +118,10 @@ export class ExamenService {
         .subscribe((res: HttpResponse<any>) => {
           resolve("0");
         }, (err: HttpErrorResponse) => {
-          if (err.status == 404)
-            resolve("No se encontró el médico");
-          else
+          if (err.status == 500)
             resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
+          else
+            resolve(err.error.mensaje);
         });
     });
   }

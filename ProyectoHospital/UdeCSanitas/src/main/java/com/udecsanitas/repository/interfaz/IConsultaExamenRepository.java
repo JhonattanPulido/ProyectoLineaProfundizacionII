@@ -32,6 +32,12 @@ public interface IConsultaExamenRepository {
     public List<Short> leer(short consultaId);
     
     /**
+     * Eliminar consulta examen filtrado por examen
+     * @param examenId 
+     */
+    public void eliminarExamen(short examenId);
+    
+    /**
      * Cantidad de consultas examen con una consulta y un examen
      * @param consultaId
      * @param examenId

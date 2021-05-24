@@ -107,11 +107,13 @@ public class MedicoController {
      * @param id - ID del médico
      * @return 200
      * @throws NotFoundException 
+     * @throws IntegridadException
      */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response eliminar(@PathParam("id") Short id) throws  NotFoundException {
+    public Response eliminar(@PathParam("id") Short id) throws  NotFoundException,
+                                                                IntegridadException {
         medicoService.eliminar(id);
         return Response.status(Response.Status.OK)
                         .build();

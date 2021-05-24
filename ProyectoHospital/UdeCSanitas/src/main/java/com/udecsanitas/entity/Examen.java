@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "QExamenes", query = "SELECT COUNT(e) FROM Examen e WHERE e.id = :id"), // Cantidad de exámenes con ID
     @NamedQuery(name = "QExamenesT", query = "SELECT COUNT(e) FROM Examen e"), // Cantidad total de médicos
     @NamedQuery(name = "QExamenesNombre", query = "SELECT COUNT(e) FROM Examen e WHERE e.nombre = :nombre"), // Cantidad de exámenes con un nombre
+    @NamedQuery(name = "QExamenesConsultaExamen", query = "SELECT COUNT (ce) FROM ConsultaExamen ce WHERE ce.examen.id = :id"),
     @NamedQuery(name = "LeerExamen", query = "SELECT e FROM Examen e WHERE e.id = :id"), // Leer examen filtrado por id
     @NamedQuery(name = "LeerExamenes", query = "SELECT e FROM Examen e ORDER BY e.id"), // Leer todos los exámenes existentes
     @NamedQuery(name = "ValidarNombre", query = "SELECT COUNT(e) FROM Examen e WHERE e.nombre = :nombre AND e.id <> :id"),

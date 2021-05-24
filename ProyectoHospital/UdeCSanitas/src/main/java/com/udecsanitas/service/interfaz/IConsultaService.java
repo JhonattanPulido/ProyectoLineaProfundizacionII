@@ -5,6 +5,7 @@ package com.udecsanitas.service.interfaz;
 import java.util.List;
 import javax.ejb.Local;
 import com.udecsanitas.entity.Consulta;
+import com.udecsanitas.utilitarie.UConsulta;
 import com.udecsanitas.exception.NotFoundException;
 import com.udecsanitas.exception.NoContentException;
 
@@ -30,6 +31,14 @@ public interface IConsultaService {
                                                                             NotFoundException;
     
     /**
+     * Leer consulta
+     * @param id
+     * @return Consulta
+     * @throws NotFoundException 
+     */
+    public UConsulta leer(short id) throws   NotFoundException;
+    
+    /**
      * Leer consultas paginadas
      * @param inicio
      * @param cantidad
@@ -40,5 +49,19 @@ public interface IConsultaService {
      */
     public String leer(short inicio, short cantidad, short medicoId) throws NotFoundException,
                                                                             NoContentException;
+    
+    /**
+     * Actualizar  consulta
+     * @param consulta
+     * @throws NotFoundException 
+     */
+    public void actualizar(Consulta consulta) throws    NotFoundException;
+    
+    /**
+     * Eliminar consulta
+     * @param consultaId
+     * @throws NotFoundException 
+     */
+    public void eliminar(short consultaId) throws   NotFoundException;
     
 }

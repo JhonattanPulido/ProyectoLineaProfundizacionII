@@ -33,8 +33,11 @@ import javax.json.bind.annotation.JsonbTransient;
 @Entity
 @Table(name = "consultas", schema = "public")
 @NamedQueries({
+    @NamedQuery(name = "QConsultas", query = "SELECT COUNT(c) FROM Consulta c WHERE c.id = :id"),
     @NamedQuery(name = "QConsultasXMedico", query = "SELECT COUNT(c) FROM Consulta c WHERE c.medico.id = :medico_id"),
-    @NamedQuery(name = "LeerConsultasXMedico", query = "SELECT c FROM Consulta c WHERE c.medico.id = :medico_id ORDER BY c.id ASC")
+    @NamedQuery(name = "LeerConsulta", query = "SELECT c FROM Consulta c WHERE c.id = :id"),
+    @NamedQuery(name = "LeerConsultasXMedico", query = "SELECT c FROM Consulta c WHERE c.medico.id = :medico_id ORDER BY c.id ASC"),
+    @NamedQuery(name = "EliminarConsulta", query = "DELETE FROM Consulta c WHERE c.id = :id")
 })
 public class Consulta implements Serializable {
     

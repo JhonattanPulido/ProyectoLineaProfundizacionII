@@ -66,6 +66,26 @@ export class PaginarComponent implements OnInit {
 
   // Métodos
 
+  // Actualizar consulta
+  public async actualizar(id: number) : Promise<void> {
+    
+  }
+
+  // Eliminar consulta
+  public async eliminar(id: number) : Promise<void> {
+    await this.consultaService.eliminar(id)
+      .then((res: string) => {
+        if (res == '0')
+          window.location.reload();
+        else {
+          this.snackBar.open(res, 'Cerrar', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          });
+        }
+      });
+  }
+
   // Obtener parámetros de Url
   private obtenerParametros(...param: string[]) : Promise<number[] | null> {    
     return new Promise(resolve => {

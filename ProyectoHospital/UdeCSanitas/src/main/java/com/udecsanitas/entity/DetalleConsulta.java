@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * Entidad detalle consulta
@@ -23,6 +25,9 @@ import javax.json.bind.annotation.JsonbTransient;
  */
 @Entity
 @Table(name = "detalles_consultas", schema = "public")
+@NamedQueries({
+    @NamedQuery(name = "EliminarDetalleConsulta", query = "DELETE FROM DetalleConsulta dc WHERE dc.consulta.id = :consulta_id")
+})
 public class DetalleConsulta implements Serializable {
     
     // Variables

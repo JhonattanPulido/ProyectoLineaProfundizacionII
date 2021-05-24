@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import com.udecsanitas.entity.Medico;
 import com.udecsanitas.entity.Examen;
 import com.udecsanitas.entity.Consulta;
+import com.udecsanitas.utilitarie.UExamen;
 import com.udecsanitas.utilitarie.UConsulta;
 import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.entity.ConsultaExamen;
@@ -23,7 +24,6 @@ import com.udecsanitas.repository.interfaz.IExamenRepository;
 import com.udecsanitas.repository.interfaz.IMedicoRepository;
 import com.udecsanitas.repository.interfaz.IConsultaRepository;
 import com.udecsanitas.repository.interfaz.IConsultaExamenRepository;
-import com.udecsanitas.utilitarie.UExamen;
 
 /**
  * Capa de servicios de consulta
@@ -94,6 +94,40 @@ public class ConsultaService implements IConsultaService {
         else
             throw new NoContentException("");
         
+    }
+    
+    /**
+     * Leer consulta
+     * @param id
+     * @return Consulta
+     * @throws NotFoundException 
+     */
+    @Override
+    public UConsulta leer(short id) throws   NotFoundException {
+        
+        Consulta cons = consultaRepository.leer(id);
+        ModelMapper modelMapper = new ModelMapper();        
+        
+        UDetalleConsulta detalleConsultaAux;
+        List<Short> listaExamenes = consultaExamenRepository.leer(id);
+        List<UExamen> examenes = new ArrayList<>();        
+        List<UDetalleConsulta> detallesConsultas = new ArrayList<>();
+        
+        for (Short examenId: listaExamenes)
+            examenes.add(modelMapper.map(examenRepository.leer("LeerExamen", examenId), UExamen.class));
+        
+        for (DetalleConsulta detalleConsulta: cons.getListaDetallesConsultas()) {
+            detalleConsultaAux = modelMapper.map(detalleConsulta, UDetalleConsulta.class);
+            detalleConsultaAux.setConsulta(null);
+            detallesConsultas.add(detalleConsultaAux);
+        }
+        
+        UConsulta consulta = modelMapper.map(cons, UConsulta.class);
+        consulta.setListaExamenes(examenes);
+        consulta.setListaDetallesConsultas(detallesConsultas);
+        consulta.setMedico(null);
+        
+        return consulta;
     }
 
     /**
@@ -178,5 +212,97 @@ public class ConsultaService implements IConsultaService {
             throw new NotFoundException("No se encontró el médico");
         
     }
+    
+    /**
+     * Actualizar consulta
+     * @param consulta
+     * @throws NotFoundException 
+     */
+    @Override
+    public void actualizar(Consulta consulta) throws NotFoundException {
+        
+        if (consultaRepository.cantidadId(consulta.getId()) == 1) {
+            
+            for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas())
+                detalleConsulta.setConsulta(consulta);
+            
+            consultaRepository.actualizar(consulta);
+                        
+            List<Short> examenes = consultaExamenRepository.leer(consulta.getId());
+            eliminarExamenes(consulta.getListaExamenes(), examenes);
+            crearExamenes(consulta.getListaExamenes(), examenes, consulta);                       
+            
+        } else
+            throw new NotFoundException("No se encontró la consulta");
+        
+    }
+    
+    /**
+     * Eliminar exámenes no deseados
+     * @param listaExamenes - Nuevos exámenes
+     * @param examenes - Id de los exámenes asociados a consulta almacenados en base de datos
+     * @throws NotFoundException
+     */
+    private void eliminarExamenes(List<Short> listaExamenes, List<Short> examenes) throws   NotFoundException {
+        
+        boolean eliminarExamen;
+        
+        for (short exId: examenes) {
+            
+            eliminarExamen = true;
+            for (short examenId: listaExamenes)
+                if (exId == examenId) {
+                    eliminarExamen = false;
+                    break;
+                }
+            
+            if (eliminarExamen == true) consultaExamenRepository.eliminarExamen(exId);
+            
+        }
+    }
+    
+    /**
+     * Añadir nuevos exámenes
+     * @param listaExamenes - Nuevos exámenes
+     * @param examenes - Id de los exámenes asociados a consulta almacenados en base de datos
+     * @param consultaId - ID de la consulta
+     */
+    private void crearExamenes(List<Short> listaExamenes, List<Short> examenes, Consulta consulta) {
+        
+        boolean crearExamen;
+        
+        for (short examenId: listaExamenes) {
+            
+            crearExamen = true;            
+            for (short exId: examenes)
+                if (examenId == exId) {
+                    crearExamen = false;
+                    break;
+                }
+            
+            if (crearExamen == true) {
+                Examen examen = new Examen();
+                examen.setId(examenId);                
+                consultaExamenRepository.crear(new ConsultaExamen(consulta, examen));
+            }
+            
+        }
+        
+    }
+
+    /**
+     * Eliminar consulta
+     * @param consultaId
+     * @throws NotFoundException 
+     */
+    @Override
+    public void eliminar(short consultaId) throws   NotFoundException {
+        
+        if (consultaRepository.cantidadId(consultaId) == 1)
+            consultaRepository.eliminar(consultaRepository.leer(consultaId));
+        else
+            throw new NotFoundException("No se encontró la consulta");
+        
+    }        
     
 }

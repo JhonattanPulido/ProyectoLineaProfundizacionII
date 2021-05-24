@@ -46,6 +46,15 @@ public class ConsultaExamenRepository implements IConsultaExamenRepository {
         //return em.createNamedQuery("LeerXConsulta", ConsultaExamen.class).setParameter("consulta_id", consultaId).getResultList();
         return em.createNamedQuery("LeerXConsulta", short.class).setParameter("consulta_id", consultaId).getResultList();
     }
+    
+    /**
+     * Eliminar consulta examen filtrado por examen
+     * @param examenId 
+     */
+    @Override
+    public void eliminarExamen(short examenId) {        
+        em.createNamedQuery("EliminarCEExamen").setParameter("examen_id", examenId).executeUpdate();
+    }
 
     /**
      * Cantidad de consultas examen con una consulta y un examen
@@ -59,6 +68,6 @@ public class ConsultaExamenRepository implements IConsultaExamenRepository {
                 .setParameter("consulta_id", consultaId)
                 .setParameter("examen_id", examenId)
                 .getFirstResult();
-    }    
+    }        
     
 }

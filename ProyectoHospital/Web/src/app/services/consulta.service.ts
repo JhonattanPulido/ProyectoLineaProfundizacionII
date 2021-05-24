@@ -38,6 +38,19 @@ export class ConsultaService {
     });
   }
 
+  // Leer consulta
+  public async leer(id: number) : Promise<Consulta | null> {
+    return new Promise(resolve => {
+      this.http.get(`${ webAPI }/consultas/${ id }`, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          console.log(res.body);          
+          resolve(res.body);
+        }, (err: HttpErrorResponse) => {
+          resolve(null);
+        });
+    });
+  }
+
   // Paginar consultas
   public async paginar(inicio: number, cantidad: number, medicoId: number) : Promise<ConsultaPaginador | null> {
     return new Promise(resolve => {
@@ -56,6 +69,23 @@ export class ConsultaService {
 
         }, (err: HttpErrorResponse) => {
           resolve(null);
+        });
+    });
+  }
+
+  // Actualizar consulta
+
+  // Eliminar consulta
+  public async eliminar(id: number) : Promise<string> {
+    return new Promise(resolve => {
+      this.http.delete(`${ webAPI }/consultas/${ id }`, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          resolve("0");
+        }, (err: HttpErrorResponse) => {
+          if (err.status == 500)
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");            
+          else
+            resolve(err.error.mensaje);
         });
     });
   }

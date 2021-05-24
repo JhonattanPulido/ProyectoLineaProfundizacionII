@@ -37,6 +37,13 @@ public interface IExamenRepository extends IGenericaRepository<Examen> {
     public long cantidadNombre(String nombre);
     
     /**
+     * Cantidad de consultas examenes que tienen asociado un examen
+     * @param id
+     * @return Cantidad de exámenes
+     */
+    public long cantidadConsultasExamenes(short id);
+    
+    /**
      * Validar nombre de examen para actualizar
      * @param nombre
      * @param id

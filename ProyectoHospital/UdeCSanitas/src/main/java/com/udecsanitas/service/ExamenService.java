@@ -153,12 +153,17 @@ public class ExamenService implements IExamenService {
      * Eliminar examen
      * @param id
      * @throws NotFoundException 
+     * @throws IntegridadException
      */
     @Override
-    public void eliminar(short id) throws   NotFoundException {
+    public void eliminar(short id) throws   NotFoundException,
+                                            IntegridadException {
         
         if (examenRepository.cantidadId("QExamenes", id) == 1)
-            examenRepository.eliminar(examenRepository.leer("LeerExamen", id));
+            if (examenRepository.cantidadConsultasExamenes(id) == 0)
+                examenRepository.eliminar(examenRepository.leer("LeerExamen", id));
+            else
+                throw new IntegridadException("No se puede eliminar el examen");
         else
             throw new NotFoundException("No se encontró el examen");
     }            

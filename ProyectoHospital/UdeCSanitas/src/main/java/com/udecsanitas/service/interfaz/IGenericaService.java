@@ -38,7 +38,9 @@ public interface IGenericaService<T, U> {
      * Eliminar registro
      * @param id - ID del registro
      * @throws NotFoundException 
+     * @throws IntegridadException
      */
-    public void eliminar(short id) throws    NotFoundException;
+    public void eliminar(short id) throws   NotFoundException,
+                                            IntegridadException;
     
 }

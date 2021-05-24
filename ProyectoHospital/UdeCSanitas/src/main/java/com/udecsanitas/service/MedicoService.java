@@ -133,12 +133,17 @@ public class MedicoService implements IMedicoService {
      * Eliminar médico
      * @param id - ID del médico
      * @throws NotFoundException 
+     * @throws IntegridadException
      */
     @Override
-    public void eliminar(short id) throws  NotFoundException {
+    public void eliminar(short id) throws   NotFoundException,
+                                            IntegridadException {
         
         if (medicoRepository.cantidadId("QMedicos", id) == 1)
-            medicoRepository.eliminar(medicoRepository.leer("LeerMedico", id));
+            if (medicoRepository.cantidadConsultas(id) == 0)
+                medicoRepository.eliminar(medicoRepository.leer("LeerMedico", id));
+            else
+                throw new IntegridadException("No se puede eliminar el médico");
         else
             throw new NotFoundException("No se encontró el médico");
         

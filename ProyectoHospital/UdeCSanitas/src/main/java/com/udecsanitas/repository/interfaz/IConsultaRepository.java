@@ -4,6 +4,7 @@ package com.udecsanitas.repository.interfaz;
 // Librerías
 import javax.ejb.Local;
 import com.udecsanitas.entity.Consulta;
+import com.udecsanitas.exception.NotFoundException;
 import java.util.List;
 
 /**
@@ -25,6 +26,14 @@ public interface IConsultaRepository {
     public Consulta crear(Consulta consulta);
     
     /**
+     * Leer consulta por ID
+     * @param id
+     * @return Consulta
+     * @throws NotFoundException
+     */
+    public Consulta leer(short id) throws   NotFoundException;
+    
+    /**
      * Leer consultas filtradas por médico
      * @param inicio
      * @param cantidad
@@ -32,6 +41,25 @@ public interface IConsultaRepository {
      * @return Lista de consultas
      */
     public List<Consulta> leer(short inicio, short cantidad, short medicoId);
+    
+    /**
+     * Actualizar consulta
+     * @param consulta 
+     */
+    public void actualizar(Consulta consulta);
+    
+    /**
+     * Eliminar consulta
+     * @param consulta 
+     */
+    public void eliminar(Consulta consulta);
+    
+    /**
+     * Cantidad de consultas con un id
+     * @param id
+     * @return Cantidad de registros
+     */
+    public long cantidadId(short id);
     
     /**
      * Cantidad de consultas con un médico asociado

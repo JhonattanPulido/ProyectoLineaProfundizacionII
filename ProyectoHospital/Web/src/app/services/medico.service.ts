@@ -31,14 +31,10 @@ export class MedicoService {
         .subscribe((res: HttpResponse<any>) => {
           resolve("0"); // Médico creado correctamente          
         }, (err: HttpErrorResponse) => {
-          console.log(err);
-          switch (err.status) {            
-            case 409:
-              resolve(err.error.mensaje); // Error 409
-              break;
-            default:
-              resolve("Ha ocurrido un error inesperado, intentelo nuevamente!"); // Error 500
-          }
+          if (err.status == 500)
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");            
+          else
+            resolve(err.error.mensaje);
         });
     });
   }
@@ -103,10 +99,10 @@ export class MedicoService {
         .subscribe((res: HttpResponse<any>) => {
           resolve("0");
         }, ((err: HttpErrorResponse) => {
-          if (err.status == 404 || err.status == 409)
-            resolve(err.error.mensaje);
+          if (err.status == 500)
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");            
           else
-            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
+            resolve(err.error.mensaje);
         }));
     });
   }
@@ -118,10 +114,10 @@ export class MedicoService {
         .subscribe((res: HttpResponse<any>) => {
           resolve("0");
         }, (err: HttpErrorResponse) => {
-          if (err.status == 404)
-            resolve("No se encontró el médico");
+          if (err.status == 500)
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");            
           else
-            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
+            resolve(err.error.mensaje);
         });
     });
   }
