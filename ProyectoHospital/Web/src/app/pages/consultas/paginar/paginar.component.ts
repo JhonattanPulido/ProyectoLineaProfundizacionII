@@ -68,7 +68,8 @@ export class PaginarComponent implements OnInit {
 
   // Actualizar consulta
   public async actualizar(id: number) : Promise<void> {
-    
+    localStorage.setItem('consulta-id', id.toString());
+    this.router.navigateByUrl('/consultas/actualizar');
   }
 
   // Eliminar consulta

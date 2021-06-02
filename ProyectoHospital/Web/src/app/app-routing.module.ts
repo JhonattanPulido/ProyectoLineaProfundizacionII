@@ -19,7 +19,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'medicos',
     pathMatch: 'full' 
-  }  
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
+  }
 ];
 
 @NgModule({

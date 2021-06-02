@@ -42,8 +42,7 @@ export class ConsultaService {
   public async leer(id: number) : Promise<Consulta | null> {
     return new Promise(resolve => {
       this.http.get(`${ webAPI }/consultas/${ id }`, { observe: 'response' })
-        .subscribe((res: HttpResponse<any>) => {
-          console.log(res.body);          
+        .subscribe((res: HttpResponse<any>) => {          
           resolve(res.body);
         }, (err: HttpErrorResponse) => {
           resolve(null);
@@ -55,7 +54,7 @@ export class ConsultaService {
   public async paginar(inicio: number, cantidad: number, medicoId: number) : Promise<ConsultaPaginador | null> {
     return new Promise(resolve => {
       this.http.get(`${ webAPI }/consultas/pag/${ inicio }/${ cantidad }/${ medicoId }`, { observe: 'response' })
-        .subscribe((res: HttpResponse<any>) => {
+        .subscribe((res: HttpResponse<any>) => {          
 
           var consultaPaginador: ConsultaPaginador = {
             cantidadTotal: res.body.cantidadTotal,
@@ -74,6 +73,19 @@ export class ConsultaService {
   }
 
   // Actualizar consulta
+  public async actualizar(consulta: Consulta) : Promise<string> {
+    return new Promise(resolve => {
+      this.http.put(`${ webAPI }/consultas`, consulta, { observe: 'response' })
+        .subscribe((res: HttpResponse<any>) => {
+          resolve("0");
+        }, (err: HttpErrorResponse) => {
+          if (err.status == 500)
+            resolve("Ha ocurrido un error inesperado, inténtelo nuevamente");
+          else
+            resolve(err.error.mensaje);
+        });
+    });
+  }
 
   // Eliminar consulta
   public async eliminar(id: number) : Promise<string> {

@@ -6,13 +6,12 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 
 // Entidades
 import { Examen } from 'src/app/entidades/examen.entity';
+import { Consulta } from 'src/app/entidades/consulta.entity';
 
 // Servicios
 import { ExamenService } from 'src/app/services/examen.service';
 import { ConsultaService } from 'src/app/services/consulta.service';
 import { DetalleConsulta } from 'src/app/entidades/detalle-consulta.entity';
-import { Consulta } from 'src/app/entidades/consulta.entity';
-
 
 @Component({
   selector: 'app-consultas',
@@ -119,7 +118,7 @@ export class ConsultasComponent implements OnInit {
       };
 
       this.listaDetallesConsultas.push(detalleConsulta);            
-      this.formGroup.reset();
+      this.formGroup.reset();      
       this.formGroup.markAsUntouched();
 
     } else {
