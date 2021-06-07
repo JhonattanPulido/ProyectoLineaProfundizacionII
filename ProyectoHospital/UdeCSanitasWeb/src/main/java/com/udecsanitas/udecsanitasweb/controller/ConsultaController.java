@@ -50,7 +50,8 @@ public class ConsultaController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response crear(List<Consulta> listaConsultas, @PathParam("medicoId") Short medicoId) throws  NoContentException,
-                                                                                                        NotFoundException {
+                                                                                                        NotFoundException,
+                                                                                                        Exception {
         consultaService.crear(listaConsultas, medicoId);
         return Response.status(Response.Status.CREATED)
                         .build();

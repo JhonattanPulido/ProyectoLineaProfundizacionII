@@ -7,11 +7,17 @@ import java.util.List;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
 import org.json.JSONObject;
+import javax.ejb.SessionContext;
+import javax.annotation.Resource;
 import org.modelmapper.ModelMapper;
 import com.udecsanitas.entity.Medico;
 import com.udecsanitas.entity.Examen;
+import javax.ejb.TransactionAttribute;
 import com.udecsanitas.entity.Consulta;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionAttributeType;
 import com.udecsanitas.utilitarie.UExamen;
+import javax.ejb.TransactionManagementType;
 import com.udecsanitas.utilitarie.UConsulta;
 import com.udecsanitas.utilitarie.UPaginador;
 import com.udecsanitas.entity.ConsultaExamen;
@@ -32,6 +38,7 @@ import com.udecsanitas.repository.interfaz.IConsultaExamenRepository;
  * @since 23/05/2021
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class ConsultaService implements IConsultaService {
 
     // Variables
@@ -47,6 +54,9 @@ public class ConsultaService implements IConsultaService {
     
     @EJB
     private IConsultaExamenRepository consultaExamenRepository;
+    
+    @Resource
+    private SessionContext userTransaction;
 
     // Métodos
 
@@ -58,42 +68,56 @@ public class ConsultaService implements IConsultaService {
      * @throws NotFoundException     
      */
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void crear(List<Consulta> listaConsultas, short medicoId) throws NoContentException,
-                                                                            NotFoundException {                
+                                                                            NotFoundException,
+                                                                            Exception {                
         
-        if (listaConsultas.size() > 0)
-            if (medicoRepository.cantidadId("QMedicos", medicoId) == 1) {
+        try {                       
             
-                Medico medico = medicoRepository.leer("LeerMedico", medicoId);
-                Consulta consultaAux;
-                Examen examenAux = new Examen();
-                
-                for (Consulta consulta: listaConsultas) {
-                    
-                    consulta.setMedico(medico);
-                    
-                    for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas())
-                        detalleConsulta.setConsulta(consulta);
-                    
-                    // Verificando que los exámenes existan
-                    for (Short examenId: consulta.getListaExamenes())
-                        if (examenRepository.cantidadId("QExamenes", examenId) == 0)
-                            throw new NotFoundException("No se encontró el examen");                                        
-                    
-                    consultaAux = consultaRepository.crear(consulta);                    
-                    
-                    for (Short examenId: consulta.getListaExamenes()) {
-                        examenAux.setId(examenId);
-                        consultaExamenRepository.crear(new ConsultaExamen(consultaAux, examenAux));
-                    }                 
-                                        
-                }                                
-                
-            } else
-                throw new NotFoundException("No se encontró el médico asociado");
-        else
-            throw new NoContentException("");
-        
+            if (listaConsultas.size() > 0)
+                if (medicoRepository.cantidadId("QMedicos", medicoId) == 1) {
+
+                    Medico medico = medicoRepository.leer("LeerMedico", medicoId);
+                    Consulta consultaAux;
+                    Examen examenAux = new Examen();
+
+                    for (Consulta consulta: listaConsultas) {
+
+                        consulta.setMedico(medico);
+
+                        for (DetalleConsulta detalleConsulta: consulta.getListaDetallesConsultas())
+                            detalleConsulta.setConsulta(consulta);
+
+                        // Verificando que los exámenes existan
+                        for (Short examenId: consulta.getListaExamenes())
+                            if (examenRepository.cantidadId("QExamenes", examenId) == 0)
+                                throw new NotFoundException("No se encontró el examen");                                        
+
+                        consultaAux = consultaRepository.crear(consulta);                    
+
+                        for (Short examenId: consulta.getListaExamenes()) {
+                            examenAux.setId(examenId);
+                            consultaExamenRepository.crear(new ConsultaExamen(consultaAux, examenAux));
+                        }                 
+
+                    }                                
+
+                } else
+                    throw new NotFoundException("No se encontró el médico asociado");
+            else
+                throw new NoContentException("");                        
+            
+        } catch (NoContentException nce) {
+            userTransaction.setRollbackOnly();         
+            throw new NoContentException(nce.getMessage());
+        } catch(NotFoundException nfe) {
+            userTransaction.setRollbackOnly();
+            throw new NotFoundException(nfe.getMessage());
+        } catch (Exception e) {            
+            userTransaction.setRollbackOnly(); 
+            throw new Exception("Ha ocurrido un error inesperado, inténtelo nuevamente");
+        }          
     }
     
     /**

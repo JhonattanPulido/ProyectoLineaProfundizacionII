@@ -28,7 +28,8 @@ public interface IConsultaService {
      * @throws NotFoundException     
      */
     public void crear(List<Consulta> listaConsultas, short medicoId) throws NoContentException,
-                                                                            NotFoundException;
+                                                                            NotFoundException,
+                                                                            Exception;
     
     /**
      * Leer consulta
