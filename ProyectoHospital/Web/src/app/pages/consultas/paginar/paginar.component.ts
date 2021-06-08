@@ -30,6 +30,7 @@ export class PaginarComponent implements OnInit {
   public cantidad?: number;
   public nombreMedico?: string;
   public dataSource?: Consulta[];
+  public paginas: number[];
   public consultaPaginador?: ConsultaPaginador;
   public displayedColumns: string[] = ['id', 'fecha', 'detallesConsultas', 'examenes', 'acciones'];
   private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -42,7 +43,9 @@ export class PaginarComponent implements OnInit {
     private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
     private consultaService: ConsultaService
-  ) { }
+  ) { 
+    this.paginas = [];
+  }
 
   ngOnInit(): void {
 
@@ -57,7 +60,9 @@ export class PaginarComponent implements OnInit {
         .then((res: ConsultaPaginador | null) => {
           if (res != null) {
             this.consultaPaginador = res;           
-            this.dataSource = this.consultaPaginador.lista;                         
+            this.dataSource = this.consultaPaginador.lista;     
+            for (let i = 0; i < this.consultaPaginador!.cantidadPaginas; i++)
+              this.paginas?.push(i);                    
           }
         });  
       });
@@ -65,6 +70,31 @@ export class PaginarComponent implements OnInit {
   }
 
   // Métodos
+
+  // Paginar
+  public paginar(pagina: number) : void {
+    this.router.navigate(['consultas', 'pag', pagina, '5'])
+      .then(_ => {
+        this.obtenerParametros('inicio', 'cantidad')
+          .then((res: number[] | null) => {
+
+            this.paginas = [];
+            this.inicio = res![0];
+            this.cantidad = res![1];
+            this.nombreMedico = localStorage.getItem('medico-nombre')!;
+
+            this.consultaService.paginar(this.inicio!, this.cantidad!, Number.parseInt(localStorage.getItem('medico-id')!))
+            .then((res: ConsultaPaginador | null) => {
+              if (res != null) {
+                this.consultaPaginador = res;           
+                this.dataSource = this.consultaPaginador.lista;     
+                for (let i = 0; i < this.consultaPaginador!.cantidadPaginas; i++)
+                  this.paginas?.push(i);                    
+              }
+            });  
+          });
+      });    
+  }
 
   // Actualizar consulta
   public async actualizar(id: number) : Promise<void> {

@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+li {
+    list-style: none;
+}
+
 .contenedor {
     position: absolute;
     width: 80%;
@@ -32,4 +36,19 @@ form {
     padding: .6rem 0;
     text-align: center;
     border-bottom: 1px solid #ccc;
+}
+
+.paginador-cntr {
+    display: flex;
+    width: 100%;
+    margin-top: 45px;    
+    justify-content: center;  
+}
+
+.paginador-cntr > li {
+    margin-right: 15px;    
+}
+
+.paginador-cntr > li:last-child {
+    margin-right: 0;
 }

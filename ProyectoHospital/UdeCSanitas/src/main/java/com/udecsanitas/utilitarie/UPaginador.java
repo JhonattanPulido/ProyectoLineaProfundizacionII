@@ -4,7 +4,6 @@ package com.udecsanitas.utilitarie;
 // Librerías
 import java.util.List;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Utilitario de paginador
@@ -45,8 +44,8 @@ public class UPaginador<T> implements Serializable {
         this.lista = lista;
         this.paginaActual = paginaActual;
         this.cantidadTotal = cantidadTotal;
-        this.cantidadMostrar = cantidadMostrar;
-        cantidadPaginas = (Math.ceil(cantidadTotal / cantidadMostrar) + 1); // Modificar esto
+        this.cantidadMostrar = cantidadMostrar;        
+        cantidadPaginas = Math.ceil((double) cantidadTotal / (double) cantidadMostrar);
     }
 
     // Métodos get & set

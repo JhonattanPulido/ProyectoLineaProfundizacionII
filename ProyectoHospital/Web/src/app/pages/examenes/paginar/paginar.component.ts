@@ -22,6 +22,7 @@ export class PaginarComponent implements OnInit {
   public cantidad?: number;
   public examenPaginador?: ExamenPaginador;
   public dataSource?: Examen[];
+  public paginas: number[];
   public displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'acciones'];
   private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   private verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -32,7 +33,9 @@ export class PaginarComponent implements OnInit {
     private snackBar: MatSnackBar,
     private examenService: ExamenService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) { 
+    this.paginas = [];
+  }
 
   ngOnInit(): void {
 
@@ -47,6 +50,8 @@ export class PaginarComponent implements OnInit {
           if (res != null) {
             this.examenPaginador = res;
             this.dataSource = this.examenPaginador.lista;
+            for (let i = 0; i < this.examenPaginador!.cantidadPaginas; i++)
+              this.paginas?.push(i);
           }
         });  
       });
@@ -54,6 +59,30 @@ export class PaginarComponent implements OnInit {
   }
 
   // Métodos
+
+  // Paginar
+  public paginar(pagina: number) : void {
+    this.router.navigate(['examenes', 'pag', pagina, '5'])
+      .then(_ => {
+        this.obtenerParametros('inicio', 'cantidad')
+          .then((res: number[] | null) => {
+
+            this.paginas = [];
+            this.inicio = res![0];
+            this.cantidad = res![1];
+
+            this.examenService.paginar(this.inicio!, this.cantidad!)
+            .then((res: ExamenPaginador | null) => {
+              if (res != null) {
+                this.examenPaginador = res;
+                this.dataSource = this.examenPaginador.lista;
+                for (let i = 0; i < this.examenPaginador!.cantidadPaginas; i++)
+                  this.paginas?.push(i);
+              }
+            });  
+          });
+      });    
+  }
 
   // Actualizar examen
   public actualizarExamen(id: number) : void {

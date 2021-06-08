@@ -39,4 +39,12 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <div class="paginador-cntr" *ngIf="paginas != null">
+        <li *ngFor="let pagina of paginas">
+            <!--<a [routerLink]="['/medicos/pag/', pagina, '/5']"></a>-->
+            <button mat-raised-button color="primary" (click)="paginar(pagina)">{{ pagina + 1 }}</button>
+        </li>
+    </div>
+
 </div>

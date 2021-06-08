@@ -22,6 +22,7 @@ export class PaginarComponent implements OnInit {
   public cantidad?: number;
   public medicoPaginador?: MedicoPaginador;
   public dataSource?: Medico[];
+  public paginas: number[];
   public displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correoElectronico', 'consultas', 'acciones'];
   private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   private verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -32,7 +33,9 @@ export class PaginarComponent implements OnInit {
     private snackBar: MatSnackBar,
     private medicoService: MedicoService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) { 
+    this.paginas = [];
+  }
 
   async ngOnInit(): Promise<void> {        
 
@@ -41,12 +44,15 @@ export class PaginarComponent implements OnInit {
 
         this.inicio = res![0];
         this.cantidad = res![1];
+        console.log(this.medicoPaginador);
 
         this.medicoService.paginar(this.inicio!, this.cantidad!)
         .then((res: MedicoPaginador | null) => {
           if (res != null) {
             this.medicoPaginador = res;
             this.dataSource = this.medicoPaginador.lista;
+            for (let i = 0; i < this.medicoPaginador!.cantidadPaginas; i++)
+              this.paginas?.push(i);
           }
         });  
       });
@@ -54,6 +60,31 @@ export class PaginarComponent implements OnInit {
   }
 
   // Método
+
+  // Paginar
+  public paginar(pagina: number) : void {
+    this.router.navigate(['medicos', 'pag', pagina, '5'])
+      .then(_ => {
+        this.obtenerParametros('inicio', 'cantidad')
+          .then((res: number[] | null) => {
+
+            this.paginas = [];
+            this.inicio = res![0];
+            this.cantidad = res![1];
+            console.log(this.medicoPaginador);
+
+            this.medicoService.paginar(this.inicio!, this.cantidad!)
+            .then((res: MedicoPaginador | null) => {
+              if (res != null) {
+                this.medicoPaginador = res;
+                this.dataSource = this.medicoPaginador.lista;
+                for (let i = 0; i < this.medicoPaginador!.cantidadPaginas; i++)
+                  this.paginas?.push(i);
+              }
+            });  
+          });
+      });    
+  }
 
   // Crear consulta
   public crearConsulta(id: number) : void {
